@@ -1,0 +1,120 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*Header y nav*/
+.banner{
+    display: flex;
+    background-image: url("../images/imgheader.jpg");
+    height: 20rem;
+    background-color:black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 2.5rem;
+    color: whitesmoke;
+}
+
+nav{
+    padding: 20px;
+    justify-content: center;
+    background-color: rgb(236, 236, 236);
+    border: 1px solid;
+    box-shadow: 2px 5px 9px #888888;
+    border-radius: 5px;
+}
+
+.menusuperior{
+    list-style: none;
+    text-align: center;
+}
+
+.menusuperior li{
+    display: inline-block;
+}
+.menusuperior a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    padding: 1.2rem;
+    font-size: 18px;
+}
+.menusuperior a:hover{
+    background-color: rgb(185, 185, 185);
+}
+/*****************************************************************************************************/
+/*Esto ya es el body*/
+
+.uploads{
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.nuevascargas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    box-shadow: 2px 5px 9px #888888;
+    border-radius: 5px;
+}
+.nuevascargas article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+.nuevascargas article img{
+    width: 40%;
+}
+/*****************************************************************************************************/
+.noticias{
+    justify-content: center;
+    align-items: center;
+    margin:30px;
+   
+}
+.articulos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    box-shadow: 2px 5px 9px #888888;
+    border-radius: 5px;
+}
+.articulos article{
+    width: 50%;
+    align-items: center;
+    text-align: center;
+    padding: 8px 16px 8px 16px;
+}
+.articulos p{
+    text-align: justify;
+}
+
+/*****************************************************************************************************/
+/*Pie de pagina*/
+
+.piedepagina{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 122);
+    color: whitesmoke;
+}
+.piedepagina logo{
+    display: flex;
+}
+.imagenlogo{
+    width: 15%;
+}

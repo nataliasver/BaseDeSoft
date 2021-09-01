@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Biblio de Software</title>
 </head>
 <body>
-    <header>
-        Biblio de Software
-        <br>
-        <img src="./images/imagenheader.jpg" alt="Datacenter" />
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="./pages/imgwindows.html">Imagenes de Windows</a></li>
-                <li><a href="./pages/software.html">Software</a></li>
-                <li><a href="./pages/tutosydocs.html">Tutos y docs</a></li>
-                <li><a href="./pages/drivers.html">Drivers</a></li>
-                <li><a href="./pages/noticias.html">Noticias</a></li>
-                <li><a href="./pages/aboutus.html">Sobre nosotros</a></li>
-            </ul>
-        </nav>
+    <header class="banner">
+        
+        <h1>Biblio de Software</h1>
+      
     </header>
-   
-    <section> <!--Ultimos Uploads-->
-        <h1>Ultimos Uploads</h1>
+
+    <nav>
+        <ul class="menusuperior">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./pages/imgwindows.html">Imagenes de Windows</a></li>
+            <li><a href="./pages/software.html">Software</a></li>
+            <li><a href="./pages/tutosydocs.html">Tutos y docs</a></li>
+            <li><a href="./pages/drivers.html">Drivers</a></li>
+            <li><a href="./pages/noticias.html">Noticias</a></li>
+            <li><a href="./pages/aboutus.html">Sobre nosotros</a></li>
+        </ul>
+    </nav>
+    
+    <section class="uploads"> <!--Ultimos Uploads-->
+        <h2>Ultimos Uploads</h2>
+        <div class="nuevascargas">
         <article>
             <img src="./images/iconoWindows.png" alt="Logo Windows" />
             <h2>Imagenes</h2>
@@ -39,7 +42,7 @@
         </article>
         <article>
             <img src="./images/iconoSoftware.png" alt="Logo Software" />
-            <h2>Software</h2>
+            <h3>Software</h3>
             <ol>
                 <li>Software.....</li>
                 <li>Software.....</li>
@@ -50,7 +53,7 @@
         </article>
         <article>
             <img src="./images/iconoDocumentos.jpg" alt="Logo Tutoriales Documentos" />
-            <h2>Tutos y Documentos</h2>
+            <h3>Tutos y Documentos</h3>
             <ol>
                 <li>Tutorial.....</li>
                 <li>Tutorial.....</li>
@@ -59,48 +62,53 @@
                 <li>Tutorial.....</li>
             </ol>
         </article>
+        </div>
     </section>
-    <section> <!--Noticias-->
-        <h1>Noticias</h1>
-        <article>
-            <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 1" />
-            <h2>Titulo noticia 1</h2>
-            <h3>Fecha noticia</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-        </article>
-        <article>
-          
-            <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 2" />
-            <h2>Titulo noticia 2</h2>
-            <h3>Fecha noticia</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-        </article>
-        <article>
-            <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 3" />
-            <h2>Titulo noticia 1</h2>
-            <h3>Fecha noticia</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-        </article>
+    
+    <section class="noticias"> <!--Noticias-->
+        <h2>Noticias</h2>
+        <div class="articulos">
+            <article>
+                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 1" />
+                <h3>Titulo noticia 1</h3>
+                <h4>Fecha noticia</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
+            </article>
+            <article>
+              
+                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 2" />
+                <h3>Titulo noticia 2</h3>
+                <h4>Fecha noticia</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
+            </article>
+            <article>
+                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 3" />
+                <h3>Titulo noticia 1</h3>
+                <h4>Fecha noticia</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
+            </article>
+        </div>
         <button>Ver más</button>
     </section>
-    <footer>
-        <div>
-            <img src="./images/usb.png" alt="Usb" />
-            Area Soporte
-            <br>
-            Nivel 3
+
+
+    <footer class="piedepagina">
+
+        <div class="logo">
+            <img class="imagenlogo" src="./images/usb.png" alt="Usb" />
+            <h5>Area Soporte</h5>
+            <h5>Nivel 3</h5>
         </div>
-        <div>
-            Contactanos
-            <br>
-            <img src="./images/iconocorreo.png" alt="Correo" />
-            soporte@soporte.com.ar
-            <br>
-            <img src="./images/iconoMaps.jpg" alt="Maps" />
-            Calle Numero
-            <br>
-            Ciudad de Buenos Aires
-        </div>      
+
+        <div class="contacto">
+            <h5>Contactanos</h5>
+            <img class="imagenlogo" src="./images/iconocorreo.png" alt="Correo"/>
+            <h6>soporte@soporte.com.ar</h6>
+            <img class="imagenlogo" src="./images/iconoMaps.jpg" alt="Maps"/>
+            <h6>Calle Numero</h6>
+            <h6>Ciudad de Buenos Aires</h6> 
+        </div> 
+
     </footer>
 </body>
 </html>
