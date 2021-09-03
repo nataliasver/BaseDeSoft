@@ -1,99 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
     <title>Biblio de Software</title>
 </head>
+
 <body>
     <header class="banner">
-        
         <h1>Biblio de Software</h1>
-      
     </header>
 
-    <nav>
-        <ul class="menusuperior">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="./pages/imgwindows.html">Imagenes de Windows</a></li>
-            <li><a href="./pages/software.html">Software</a></li>
-            <li><a href="./pages/tutosydocs.html">Tutos y docs</a></li>
-            <li><a href="./pages/drivers.html">Drivers</a></li>
-            <li><a href="./pages/noticias.html">Noticias</a></li>
-            <li><a href="./pages/aboutus.html">Sobre nosotros</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+                <ul class="navbar-nav menusuperior">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./pages/imgwindows.html">Imagenes/Master</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="./pages/tutosydocs.html">Tutos y docs</a>
+                    </li>
+                    <li><a class="nav-link" href="./pages/drivers.html">Drivers</a></li>
+                    <li>
+                        <a class="nav-link" href="./pages/noticias.html">Noticias</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="./pages/aboutus.html">Sobre nosotros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    
-    <section class="uploads"> <!--Ultimos Uploads-->
-        <h2>Ultimos Uploads</h2>
-        <div class="nuevascargas">
-        <article>
-            <img src="./images/iconoWindows.png" alt="Logo Windows" />
-            <h2>Imagenes</h2>
-            <ol>
-                <li>Imagen.....</li>
-                <li>Imagen.....</li>
-                <li>Imagen.....</li>
-                <li>Imagen.....</li>
-                <li>Imagen.....</li>
-            </ol>
-        </article>
-        <article>
-            <img src="./images/iconoSoftware.png" alt="Logo Software" />
-            <h3>Software</h3>
-            <ol>
-                <li>Software.....</li>
-                <li>Software.....</li>
-                <li>Software.....</li>
-                <li>Software.....</li>
-                <li>Software.....</li>
-            </ol>
-        </article>
-        <article>
-            <img src="./images/iconoDocumentos.jpg" alt="Logo Tutoriales Documentos" />
-            <h3>Tutos y Documentos</h3>
-            <ol>
-                <li>Tutorial.....</li>
-                <li>Tutorial.....</li>
-                <li>Tutorial.....</li>
-                <li>Tutorial.....</li>
-                <li>Tutorial.....</li>
-            </ol>
-        </article>
+
+    <section class="uploads m-5">
+        <h4>Ultimos uploads</h4>
+        
+        <div class=" d-flex justify-content-evenly">
+            <div class="card" style="width: 18rem;">
+                <div class="text-center m-3">
+                <img src="./images/iconoWindows.png" class="card-img-top" style="width: 200px;" alt="Icono Windows">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Software</h5>
+                </div>
+                 </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <a href="#" class="btn">Un Software</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Otro software</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un Software</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Otro software</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un Software</a></li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-info">Ir a "Ir a Imagenes/Master"</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="text-center m-3">
+                <img src="./images/iconoSoftware.png" style="width: 200px;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Imagenes/Master</h5>
+                </div>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <a href="#" class="btn">Win10 asrock generica</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Win7x86 Generica modelox</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Win7x64 Generica modelox</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Win10 bangho generica</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Win10 asus generica</a></li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-info">Ir a "Ir a Imagenes/Master"</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="text-center m-3">
+                <img src="./images/iconoDocumentos.jpg" style="width: 200px;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Tutos y docs</h5>
+                </div>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <a href="#" class="btn">Un documento</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un documento</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un documento</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un documento</a></li>
+                    <li class="list-group-item"> <a href="#" class="btn">Un documento</a></li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-info">Ir a "Tutos y docs"</a>
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <section class="noticias"> <!--Noticias-->
-        <h2>Noticias</h2>
-        <div class="articulos">
-            <article>
-                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 1" />
-                <h3>Titulo noticia 1</h3>
-                <h4>Fecha noticia</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-            </article>
-            <article>
-              
-                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 2" />
-                <h3>Titulo noticia 2</h3>
-                <h4>Fecha noticia</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-            </article>
-            <article>
-                <img src="http://lorempixel.com/400/200/technics" alt="Foto noticia 3" />
-                <h3>Titulo noticia 1</h3>
-                <h4>Fecha noticia</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nulla nemo at laudantium quibusdam fuga quos alias illum mollitia! Iusto perferendis inventore enim nihil tempora ratione earum distinctio pariatur itaque.</p>
-            </article>
-        </div>
-        <button>Ver más</button>
+
     </section>
 
+    <section class="noticias">
+        <h4>Ultimas Noticias</h4>
+        <div class=" d-flex justify-content-evenly">
+            <div class="card" style="width: 18rem;">
+                <img src="http://lorempixel.com/400/200/technics" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Noticia 2</h5>
+                    <h6 class="card-subtitle">Fecha</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-info">Leer</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="http://lorempixel.com/400/200/technics" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Noticia 2</h5>
+                    <h6 class="card-subtitle">Fecha</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-info">Leer</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="http://lorempixel.com/400/200/technics" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle">Fecha</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-info">Leer</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="piedepagina">
+    <footer class="row row-cols-4 py-5 my-5 border-top  bg-light align-content-start">
+        <div class="col">
+          <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+            <img src="./images/usb.png" class="bi me-2" width="50" height="50" alt="">
+          </a>
+          <p class="text-muted">© 2021</p>
+        </div>
+        <div class="col">
+            Área Soporte Nivel 3
+        </div>
+    
+        <div class="col">
+          <h5>Contenido</h5>
+          <ul class="nav flex-column">
 
+            <li class="nav-item mb-2"><a href="index.html" class="nav-link p-0 text-muted">Home</a>
+            </li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Imagenes/Master</a>
+            </li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Tutos y docs</a>
+            </li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Drivers</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Noticias</a>
+            </li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sobre nosotros</a>
+            </li>
+          </ul>
+        </div>
+    </footer>
+    <!-- <footer class="piedepagina">
         <div class="logo">
             <img class="imagenlogo" src="./images/usb.png" alt="Usb" />
             <h5>Area Soporte</h5>
@@ -102,13 +181,20 @@
 
         <div class="contacto">
             <h5>Contactanos</h5>
-            <img class="imagenlogo" src="./images/iconocorreo.png" alt="Correo"/>
+            <img class="imagenlogo" src="./images/iconocorreo.png" alt="Correo" />
             <h6>soporte@soporte.com.ar</h6>
-            <img class="imagenlogo" src="./images/iconoMaps.jpg" alt="Maps"/>
+            <img class="imagenlogo" src="./images/iconoMaps.jpg" alt="Maps" />
             <h6>Calle Numero</h6>
-            <h6>Ciudad de Buenos Aires</h6> 
-        </div> 
+            <h6>Ciudad de Buenos Aires</h6>
+        </div>
+    </footer> -->
 
-    </footer>
+    <!-------------Acá arrancan los scripts de Bootstrap---------------------------------->
+
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
