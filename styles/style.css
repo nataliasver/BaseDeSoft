@@ -17,11 +17,20 @@ body{
     background-position: center;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.banner::before{
+    background-color: rgba(0, 0, 0, 0.37);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
 }
 
 h1{
     font-size: 2.5rem;
     color: whitesmoke;
+    z-index: 1;
 }
 
 nav{
@@ -32,18 +41,17 @@ nav{
     box-shadow: 2px 5px 9px #888888;
 } 
 
-
 .menusuperior a{
     text-decoration: none;
     text-transform: uppercase;
-    color: black;
     padding: 1.2rem;
-    font-size: 18px; 
+    font-size: 1.2em; 
 }
-.menusuperior a:hover{
-    background-color: rgb(185, 185, 185);
-    padding: 1rem;
-    box-shadow: 2px 5px 9px #888888;
+
+.menuLink:hover{
+        text-decoration: cornflowerblue;
+        padding: 1rem;
+        box-shadow: 2px 5px 9px #888888;
 }
 
 /*****************************************************************************************************/
