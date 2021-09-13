@@ -62,7 +62,7 @@ nav{
     height: 50rem;
     background-color:black;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     justify-content: center;
     align-items: center;
