@@ -9,7 +9,7 @@ body{
 /*Header y nav*/
 .banner{
     display: flex;
-    background-image: url("../images/imgheader.jpg");
+    background-image: url("../images/computerIT.png");
     height: 20rem;
     background-color:black;
     background-repeat: no-repeat;
