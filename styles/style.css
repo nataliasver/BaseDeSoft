@@ -67,6 +67,34 @@ nav{
     justify-content: center;
     align-items: center;
 }
+.card a{
+    transition: transform linear 100ms;
+}
+.card a:hover{
+    transform: scale(1.1);
+}
+
+.tareassoporte li {
+    position: relative;
+    padding-left: 5rem;
+  }
+  
+ .tareassoporte li:before {
+    content: '';
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    background-image: url("../images/iconos_sueltos/pendriveUSB.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); 
+   
+  } 
+
 
 /*****************************************************************************************************/
 .imagenCard{
@@ -87,4 +115,9 @@ nav{
 .logoBiblio{
     width: 3rem;
     height: 3rem;
+}
+.mapa{
+    width: 15rem;
+    height: 12rem;
+    margin-bottom: 1rem;
 }
