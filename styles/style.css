@@ -53,6 +53,31 @@ nav{
         padding: 1rem;
         box-shadow: 2px 5px 9px #888888;
 }
+.irArriba{
+    padding: 0;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+}
+#btnIrArriba {
+    background: transparent;
+    display: none; 
+    width: 3rem;
+    height: 3rem;
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 99; 
+    border:none;
+    cursor:pointer; 
+    border-radius: 10px; 
+    font-size: 1rem; 
+    transition: transform linear 100ms;
+  }
+  
+  #btnIrArriba:hover {
+    transform: scale(1.1);
+  }
 
 /*****************************************************************************************************/
 /*Esto ya es el body*/
