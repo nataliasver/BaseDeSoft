@@ -28,4 +28,4 @@ app.get('*', function (req, res) {
     res.send('Le re pifiaste man. 404 not found');
 })
  
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
