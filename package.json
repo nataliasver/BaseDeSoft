@@ -1,0 +1,25 @@
+{
+  "name": "BiblioDeSoft",
+  "version": "1.0.0",
+  "description": "Esta es una web de  prueba hasta que se pueda usar la que voy desarrollando\r Temas vistos:\r - HTML\r - CSS\r - BOOTSTRAP",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nataliasver/BiblioDeSoft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nataliasver/BiblioDeSoft/issues"
+  },
+  "homepage": "https://github.com/nataliasver/BiblioDeSoft#readme"
+}
