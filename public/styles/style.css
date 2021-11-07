@@ -82,6 +82,24 @@ nav{
 /*****************************************************************************************************/
 /*Esto ya es el body*/
 
+.kg-image-card img{
+    width: 98%;
+    height: 98%;
+}
+.kg-gallery-image img{
+    width: 98%;
+    height: 98%;
+}
+.kg-bookmark-thumbnail img{
+    width: 98%;
+    height: 98%;
+}
+.kg-bookmark-icon{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+
 .coomingsoon{
     background-image: url("../images/comingsoon.jpg");
     height: 50rem;

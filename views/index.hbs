@@ -16,53 +16,23 @@
     
 
     <!--*******************************Noticias**********************************************-->
-    <section class="container uploads p-5 justify-content-center">
+  
+    <section class="container uploads p-5 justify-content-center text-align-center">
         <h4>Ultimas Noticias</h4>
         <div class="row">
+            {{#each posts}}
             <div class="card p-0 col-12 col-md-6 col-xl-3 mb-2">
-                <img src="{{posts.0.feature_image}}" class="card-img-top" alt="..." />
+                <img src="{{feature_image}}" class="card-img-top" alt="..." />
                 <div class="card-body">
-                    <h5 class="card-title">{{posts.0.title}}</h5>
-                    <h6 class="card-subtitle text-muted">{{posts.0.published_at}}</h6>
+                    <h5 class="card-title">{{title}}</h5>
+                    <h6 class="card-subtitle text-muted">{{published_at}}</h6>
                     <p class="card-text">
-                        {{{posts.0.excerpt}}}
+                        {{{excerpt}}}
                     </p>
-                    <a href="{{posts.0.url}}" class="btn btn-info">Post original</a>
+                    <a href="{{url}}" class="btn btn-info">Post original</a>
                 </div>
             </div>
-            <div class="card p-0 col-12 col-md-6 col-xl-3 mb-2">
-                <img src="{{posts.1.feature_image}}" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <h5 class="card-title">{{posts.1.title}}</h5>
-                    <h6 class="card-subtitle text-muted">{{posts.0.published_at}}</h6>
-                    <p class="card-text">
-                        {{{posts.1.excerpt}}}
-                    </p>
-                    <a href="{{posts.1.url}}" class="btn btn-info">Post original</a>
-                </div>
-            </div>
-            <div class="card p-0 col-12 col-md-6 col-xl-3 mb-2">
-                <img src="{{posts.2.feature_image}}" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <h5 class="card-title">{{posts.2.title}}</h5>
-                    <h6 class="card-subtitle text-muted">{{posts.2.published_at}}</h6>
-                    <p class="card-text">
-                        {{{posts.2.excerpt}}}
-                    </p>
-                    <a href="{{posts.2.url}}" class="btn btn-info">Post original</a>
-                </div>
-            </div>
-            <div class="card p-0 col-12 col-md-6 col-xl-3 mb-2">
-                <img src="{{posts.3.feature_image}}" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <h5 class="card-title">{{posts.3.title}}</h5>
-                    <h6 class="card-subtitle text-muted">{{posts.3.published_at}}</h6>
-                    <p class="card-text">
-                        {{{posts.3.excerpt}}}
-                    </p>
-                    <a href="{{posts.3.url}}" class="btn btn-info">Post original</a>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </section>
     <!--****************************Footer************************************************************-->
