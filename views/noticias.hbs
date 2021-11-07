@@ -13,8 +13,19 @@
 <body>
     {{>navbar}}
     <!--****************************Contenido************************************************************-->
+    <div class="w-75">
+    {{#each posts}}
+    <div class="card">
+        <img src="{{feature_image}}" class="card-img-top w-75" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{{html}}}</p>
+            <a href="{{url}}" class="btn btn-primary">Acá pongo el link original</a>
+        </div>
+    </div>
+    {{/each}}
+    </div>
 
-    <div class="coomingsoon"></div>
     <!--****************************Footer************************************************************-->
     {{>footer}}
 </body>
