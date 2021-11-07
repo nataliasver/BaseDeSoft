@@ -47,18 +47,18 @@ class App {
 
 
 
-    //Base de datos
-    const conn = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bibliodesoftsql",
-    });
+    // //Base de datos
+    // const conn = mysql.createConnection({
+    //   host: "localhost",
+    //   user: "root",
+    //   password: "",
+    //   database: "bibliodesoftsql",
+    // });
 
-    conn.connect((err) => {
-      if (err) throw err;
-      console.log("Conexion establecida..");
-    });
+    // conn.connect((err) => {
+    //   if (err) throw err;
+    //   console.log("Conexion establecida..");
+    // });
 
 
     //Conexion con ghost
