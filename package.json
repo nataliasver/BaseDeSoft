@@ -5,7 +5,9 @@
   "main": "main.js",
   "dependencies": {
     "@tryghost/content-api": "^1.5.13",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "hbs": "^4.1.2",
     "mysql": "^2.18.1"
   },

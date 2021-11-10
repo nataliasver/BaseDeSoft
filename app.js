@@ -1,10 +1,18 @@
 const express = require('express')
 const hbs = require('hbs');
-
 const mysql = require("mysql");
 const path = require("path");
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+
 //para la conexion con ghost (post)
 const GhostContentAPI = require('@tryghost/content-api')
+
+//Para la sesion
+const oneDay = 1000 * 60 * 60 * 24;
+const myusername = 'soporte'
+const mypassword = 'unaclave'
+let unasession;
 
 function getLocale() {
   if (typeof window === 'undefined' || navigator == null || navigator.language == null) {
@@ -40,12 +48,18 @@ class App {
     app.use(express.static("public"));
     hbs.registerPartials(__dirname + "/views/partials/")
 
+    app.use(cookieParser());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
     app.use("/assets", express.static(__dirname + "/public"));
 
-
+    app.use(session({
+      secret: "mysecretrandomsecretsessioncredentialahre",
+      saveUninitialized:true,
+      cookie: { maxAge: oneDay },
+      resave: false 
+    }));
 
     // //Base de datos
     // const conn = mysql.createConnection({
@@ -68,6 +82,8 @@ class App {
       version: "v3"
     });
 
+    
+    
 
     //Routes
     app.get('/', async function (req, res) {
@@ -98,6 +114,34 @@ class App {
     app.get('/aboutus', function (req, res) {
       res.render('aboutus');
     })
+    
+    //Sesiones y back office
+    app.get('/office', function (req, res) {
+      unasession=req.session;
+      if(unasession.userid){
+          res.redirect("/backoffice");
+      }else
+      res.render('office');
+    })
+    app.post('/office',(req,res) => {
+      if(req.body.elusuario == myusername && req.body.lapassword == mypassword){
+          unasession=req.session;
+          unasession.userid=req.body.username;
+          res.redirect('/backoffice');
+      }
+      else{
+          res.send(`usuario o clave incorrecta <a href=\'office'>Volver a intentar</a>`);
+      }
+    })
+    app.get('/logout',(req,res) => {
+      req.session.destroy();
+      res.redirect('/offfice');
+    });
+    
+    app.get('/backoffice',(req,res) => {
+      res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
+    });
+    
 
     app.get('*', function (req, res) {
       res.send('Le re pifiaste man. 404 not found');
