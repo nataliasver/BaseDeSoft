@@ -5,38 +5,12 @@ const path = require("path");
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const util = require("util");
+const Routes = require('./routes')
+
 
 //para la conexion con ghost (post)
-const GhostContentAPI = require('@tryghost/content-api')
-
-//Para la sesion
-const oneDay = 1000 * 60 * 60 * 24;
-const myusername = 'soporte'
-const mypassword = 'unaclave'
-let unasession;
-
-function getLocale() {
-  if (typeof window === 'undefined' || navigator == null || navigator.language == null) {
-      return 'es-AR'
-  }
-
-  if (navigator.languages != null) {
-      return navigator.languages[0];
-  }
-
-  return navigator.language
-}
-
-function dateString(date) {
-    date = new Date(date);
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const locale = getLocale();
-
-    const dateStr = date.toLocaleDateString(locale, options);
-
-    return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-}
-
+const GhostContentAPI = require('@tryghost/content-api');
+const BackOffice = require('./routes/backoffice');
 
 class App {
   static async init() {
@@ -55,6 +29,8 @@ class App {
 
     app.use("/assets", express.static(__dirname + "/public"));
 
+    //Sesion
+    const oneDay = 1000 * 60 * 60 * 24;
     app.use(session({
       secret: "mysecretrandomsecretsessioncredentialahre",
       saveUninitialized:true,
@@ -70,12 +46,10 @@ class App {
       database: "natalia_verdura",
     });
     
-    hbs.registerHelper('json', function(context) {
-      return JSON.stringify(context);
-    });
     //Con esto convierto en una promise las querys, asi puedo hacer varios llamados
     const querynaty = util.promisify(conn.query.bind(conn));
     
+    //Conexion a la base
     conn.connect((err) => {
       if (err) throw err;
       console.log("Conexion establecida..");
@@ -88,88 +62,96 @@ class App {
       version: "v3"
     });
 
-    
-    
-
-    //Routes
-    app.get('/', async function (req, res) {
-      try{
-        const posts = await apiGhost.posts.browse({ limit: 4, include: 'tags,authors' });  
-        res.render('index', {
-          posts: posts.map(post => ({...post, published_at:dateString(post.published_at)}))
-         });     
-      }catch(err){
-          res.render('404 not found');
-      }  
-    })
-    app.get('/downloads', function (req, res) {
-      res.render('downloads');
-    })
-
-    app.get('/noticias',async function (req, res) {
-      try{
-        const posts = await apiGhost.posts.browse({ limit: 5, include: 'tags,authors' });  
-        res.render('noticias', {
-          posts: posts
-         });     
-      }catch(err){
-          res.render('404 not found');
-      }  
-    })
-
-    app.get('/aboutus', function (req, res) {
-      res.render('aboutus');
-    })
-    
-    //Sesiones y back office
-    app.get('/office', function (req, res) {
-      unasession=req.session;
-      if(unasession.userid){
-          res.redirect("/backoffice");
-      }else
-      res.render('office');
-    })
-    app.post('/office',(req,res) => {
-      if(req.body.elusuario == myusername && req.body.lapassword == mypassword){
-          unasession=req.session;
-          unasession.userid=req.body.username;
-          res.redirect('/backoffice');
-      }
-      else{
-          res.send(`usuario o clave incorrecta <a href=\'office'>Volver a intentar</a>`);
-      }
-    })
-    app.get('/logout',(req,res) => {
-      req.session.destroy();
-      res.redirect('/offfice');
+    //Esto se utiliza para poder pasar todos los valores al frontend que no se renderizan
+    hbs.registerHelper('json', function(context) {
+      return JSON.stringify(context);
     });
     
-    app.get('/backoffice',async function(req, res, next){  
-        let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
-        let oficinassql = "SELECT * FROM oficinas"
-        try{
-          const equipos = await querynaty(equipossql);
-           const oficinas = await querynaty(oficinassql);
-           res.render("pedidos", {
-            results: equipos,
-            oficinas: oficinas,
-          });
-        } catch ( err ) {
-          console.log(err);
-        } 
-      //res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
-    });
-    app.get("/equipos", async function(req, res, next){  
-      let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
-      try{
-        const equipos = await querynaty(equipossql);
-         res.render("equipos", {
-          equipos: equipos,
-        });
-      } catch ( err ) {
-        console.log(err);
-      } 
-    });
+
+    Routes.init(app, apiGhost);
+    BackOffice.init(app,querynaty);
+
+
+
+    // //Routes
+    // app.get('/', async function (req, res) {
+    //   try{
+    //     const posts = await apiGhost.posts.browse({ limit: 4, include: 'tags,authors' });  
+    //     res.render('index', {
+    //       posts: posts.map(post => ({...post, published_at:dateString(post.published_at)}))
+    //      });     
+    //   }catch(err){
+    //       res.render('404 not found');
+    //   }  
+    // })
+    // app.get('/downloads', function (req, res) {
+    //   res.render('downloads');
+    // })
+
+    // app.get('/noticias',async function (req, res) {
+    //   try{
+    //     const posts = await apiGhost.posts.browse({ limit: 5, include: 'tags,authors' });  
+    //     res.render('noticias', {
+    //       posts: posts
+    //      });     
+    //   }catch(err){
+    //       res.render('404 not found');
+    //   }  
+    // })
+
+    // app.get('/aboutus', function (req, res) {
+    //   res.render('aboutus');
+    // })
+    
+    // //Sesiones y back office
+    // app.get('/office', function (req, res) {
+    //   unasession=req.session;
+    //   if(unasession.userid){
+    //       res.redirect("/backoffice");
+    //   }else
+    //   res.render('office');
+    // })
+    // app.post('/office',(req,res) => {
+    //   if(req.body.elusuario == myusername && req.body.lapassword == mypassword){
+    //       unasession=req.session;
+    //       unasession.userid=req.body.username;
+    //       res.redirect('/backoffice');
+    //   }
+    //   else{
+    //       res.send(`usuario o clave incorrecta <a href=\'office'>Volver a intentar</a>`);
+    //   }
+    // })
+    // app.get('/logout',(req,res) => {
+    //   req.session.destroy();
+    //   res.redirect('/offfice');
+    // });
+    
+    // app.get('/backoffice',async function(req, res, next){  
+    //     let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+    //     let oficinassql = "SELECT * FROM oficinas"
+    //     try{
+    //       const equipos = await querynaty(equipossql);
+    //        const oficinas = await querynaty(oficinassql);
+    //        res.render("pedidos", {
+    //         results: equipos,
+    //         oficinas: oficinas,
+    //       });
+    //     } catch ( err ) {
+    //       console.log(err);
+    //     } 
+    //   //res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
+    // });
+    // app.get("/equipos", async function(req, res, next){  
+    //   let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+    //   try{
+    //     const equipos = await querynaty(equipossql);
+    //      res.render("equipos", {
+    //       equipos: equipos,
+    //     });
+    //   } catch ( err ) {
+    //     console.log(err);
+    //   } 
+    // });
 
     //Insertar
 
@@ -196,7 +178,7 @@ class App {
 // });
 
     app.get('*', function (req, res) {
-      res.send('Le re pifiaste man. 404 not found');
+      res.render('notfound');
     })
 
     app.listen(process.env.PORT || 3000);

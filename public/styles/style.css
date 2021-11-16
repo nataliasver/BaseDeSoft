@@ -5,7 +5,9 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.notfound img{
+    height: 100vh;
+}
 /*Header y nav*/
 .banner{
     display: flex;
