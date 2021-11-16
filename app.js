@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const path = require("path");
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
+const util = require("util");
 
 //para la conexion con ghost (post)
 const GhostContentAPI = require('@tryghost/content-api')
@@ -61,19 +62,24 @@ class App {
       resave: false 
     }));
 
-    // //Base de datos
-    // const conn = mysql.createConnection({
-    //   host: "localhost",
-    //   user: "root",
-    //   password: "",
-    //   database: "bibliodesoftsql",
-    // });
-
-    // conn.connect((err) => {
-    //   if (err) throw err;
-    //   console.log("Conexion establecida..");
-    // });
-
+    //base de datos
+    const conn = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "",
+      database: "natalia_verdura",
+    });
+    
+    hbs.registerHelper('json', function(context) {
+      return JSON.stringify(context);
+    });
+    //Con esto convierto en una promise las querys, asi puedo hacer varios llamados
+    const querynaty = util.promisify(conn.query.bind(conn));
+    
+    conn.connect((err) => {
+      if (err) throw err;
+      console.log("Conexion establecida..");
+    });
 
     //Conexion con ghost
     const apiGhost = new GhostContentAPI({
@@ -138,10 +144,56 @@ class App {
       res.redirect('/offfice');
     });
     
-    app.get('/backoffice',(req,res) => {
-      res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
+    app.get('/backoffice',async function(req, res, next){  
+        let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+        let oficinassql = "SELECT * FROM oficinas"
+        try{
+          const equipos = await querynaty(equipossql);
+           const oficinas = await querynaty(oficinassql);
+           res.render("pedidos", {
+            results: equipos,
+            oficinas: oficinas,
+          });
+        } catch ( err ) {
+          console.log(err);
+        } 
+      //res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
     });
-    
+    app.get("/equipos", async function(req, res, next){  
+      let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+      try{
+        const equipos = await querynaty(equipossql);
+         res.render("equipos", {
+          equipos: equipos,
+        });
+      } catch ( err ) {
+        console.log(err);
+      } 
+    });
+
+    //Insertar
+
+// app.post("/save", (req, res) => {
+//   let data = {
+//     producto_nombre: req.body.producto_nombre,
+//     producto_precio: req.body.producto_precio,
+//   };
+//   let sql = "INSERT INTO producto SET ?";
+//   const query = util.promisify(conn.query);
+//   const results = await query(sql, data);
+//   let query = conn.query(sql, data, (err, results) => {
+//     if (err) throw err;
+//     res.redirect("/");
+//   });
+// });
+
+// app.post('/update',(req, res) => {
+//   let sql = "UPDATE producto SET producto_nombre='"+req.body.producto_nombre+"', producto_precio='"+req.body.producto_precio+"' WHERE producto_id= "+req.body.id;
+//   let query = conn.query(sql, (err, results) => {
+//     if(err) throw err;
+//     res.redirect('/');
+//   });
+// });
 
     app.get('*', function (req, res) {
       res.send('Le re pifiaste man. 404 not found');

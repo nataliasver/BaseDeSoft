@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>BackOffice - Biblio de Soft</title>
+</head>
+
+<body>
+     {{>navbarpedidos}}
+    <div class="container">
+        <h2>Ingreso de pedido</h2>
+        <form>
+            {{!-- Carga de Modelo de equipo --}}
+            <input id="results" value='{{{json results}}}'  type="hidden"/>
+            <label for="exampleDataList" class="form-label">Modelo de equipo</label>
+            <input onchange="mostrarDatos();" class="form-control" list="datalistOptions" id="exampleDataList"
+                placeholder="Ingresa el producto..">
+            <datalist id="datalistOptions">
+                {{#each results}}
+                    <option value="{{equipo_modelo}}">
+                {{/each}}
+            </datalist>
+            <label for="tipoequipo" class="form-label">Tipo</label>
+            <input class="form-control" type="text" value="" aria-label="Tipo de equipo" id="tipoequipo" readonly>
+            <label for="marcaequipo" class="form-label">Marca</label>
+            <input class="form-control" type="text" value="" aria-label="Marca" id="marcaequipo" readonly>
+
+            {{!-- Carga de oficina --}}
+            <input id="resultados_oficinas" value='{{{json oficinas}}}'  type="hidden"/>
+            <label for="opcionesOficinas" class="form-label">Oficina</label>
+            <input onchange="mostrarDatosOficinas();" class="form-control" list="opcionesOficinas" id="listaoficinas"
+                placeholder="Ingresa la oficina..">
+            <datalist id="opcionesOficinas">
+                {{#each oficinas}}
+                    <option value="{{oficina_nombre}}">
+                {{/each}}
+            </datalist>
+            <label for="direccionoficina" class="form-label">Direccion</label>
+            <input class="form-control" type="text" value="" aria-label="Direccion oficina" id="direccionoficina" readonly>
+            <label for="telefonooficina" class="form-label">Telefono</label>
+            <input class="form-control" type="text" value="" aria-label="Marca" id="telefonooficina" readonly>
+            <label for="emailoficina" class="form-label">Email</label>
+            <input class="form-control" type="text" value="" aria-label="Marca" id="emailoficina" readonly>
+            
+            <button class="btn btn-primary" onclick="verificardatosform();">Añadir pedido</button>
+
+        </form>
+
+    </div>
+
+    {{>footerpedidos}}
+
+</body>
+
+</html>
