@@ -1,22 +1,22 @@
 class BackOffice {
 
     //Para la sesion
-    
-    static async init(app, querynaty) {
+    static init(app, querynaty) {
         const myusername = 'soporte'
         const mypassword = 'unaclave'
         let unasession;
-        
+
+        console.log('registra back office')
+
         //Sesiones y back office
         app.get('/office', function (req, res) {
+            console.log('pegando a /office')
             unasession = req.session;
             if (unasession.userid) {
                 res.redirect("/backoffice");
             } else
                 res.render('office');
         })
-
-
         app.post('/office', (req, res) => {
             if (req.body.elusuario == myusername && req.body.lapassword == mypassword) {
                 unasession = req.session;

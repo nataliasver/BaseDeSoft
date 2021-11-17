@@ -23,7 +23,7 @@ class Routes {
         return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
     }
 
-    static async init(app, apiGhost) {
+    static init(app, apiGhost) {
         //Routes
         app.get('/', async function (req, res) {
             try{
@@ -56,6 +56,9 @@ class Routes {
             res.render('aboutus');
         })
         
+        app.get('*', function (req, res) {
+            res.render('notfound');
+        })
     }
 }
 

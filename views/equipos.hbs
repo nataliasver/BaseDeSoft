@@ -2,136 +2,169 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <title>BackOffice - Biblio de Soft</title>
 </head>
 
 <body>
-     {{>navbarpedidos}}
+    {{>navbarpedidos}}
     <div class="container">
         <h2>Equipos</h2>
         <div class="container">
 
-    <button class="btn btn-success" data-toggle="modal" data-target="#aniadirequipo">Añadir</button>
-    <table class="table table-striped" id="mytable">
-        <thead>
-            <tr>
-                <th> Equipo ID</th>
-                <th> Tipo de equipo </th>
-                <th> Marca </th>
-                <th> Modelo equipo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each equipos}}
-            <tr>
-                <td> {{ equipo_id}}</td>
-                <td> {{ tipo}}</td>
-                <td> {{ marca}}</td>
-                <td> {{ equipo_modelo}}</td>
-                <td>
-                <td><a href="abrirmodalparaeditar();" class="btn btn-info edit" data-id="{{ producto_id}}" data-producto-nombre="{{ producto_nombre}}" data-producto_precio="{{ producto_precio}}">Editar</a>    
-                {{!-- <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ producto_id}}"> Borrar</a> --}}
-                </td>
-            </tr>
-            {{/each}}
+            <button class="btn btn-success" data-toggle="modal" data-target="#aniadirequipo">Añadir</button>
+            <table class="table table-striped" id="mytable">
+                <thead>
+                    <tr>
+                        <th> Equipo ID</th>
+                        <th> Tipo de equipo </th>
+                        <th> Marca </th>
+                        <th> Modelo equipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each equipos}}
+                    <tr>
+                        <td> {{ equipo_id}}</td>
+                        <td> {{ tipo_equipo}}</td>
+                        <td> {{ marca_equipo}}</td>
+                        <td> {{ equipo_modelo}}</td>
+                        <td>
+                        <td>
+                            <a href="javascript:abrirmodalparaeditar()" class="btn btn-info edit"
+                                data-id="{{equipo_id}}" data-equipo-marca="{{marca_equipo}}"
+                                data-equipo-modelo="{{equipo_modelo}}" data-equipo-tipo="{{tipo_equipo}}">Editar</a>
+                            {{!-- <a href="javascript:void(0);" class="btn btn-danger delete"
+                                data-id="{{ producto_id}}"> Borrar</a> --}}
+                        </td>
+                    </tr>
+                    {{/each}}
 
 
-        </tbody>
-    </table>
-   </div>
+                </tbody>
+            </table>
+        </div>
 
 
-{{!-- AÑADIR Modal --}}
+        {{!-- AÑADIR Modal --}}
 
-        <form action="/save" method="post">
-            <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Añadir Producto nuevo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" name="producto_nombre" class="form-control" placeholder="Producto Nombre" required>
-                </div>
+        {{!-- <form action="/save" method="post">
+            <div class="modal fade" id="modalAddEquipo" tabindex="-1" role="dialog"
+                aria-labelledby="modalAddEquipoLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Añadir Equipo Nuevo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="equipo_modelo" class="form-control" placeholder="Modelo Equipo"
+                                    required>
+                            </div>
 
-                <div class="form-group">
-                    <input type="text" name="producto_precio" class="form-control" placeholder="precio" required>
-                </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                            <div class="form-group">
+                                <input type="text" name="equipo_marca" class="form-control" placeholder="Marca"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Guardar cambios</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modalAddEquipo">Cerrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </form> --}}
+
+
+        {{!-- /EDITAR --}}
+
+        <form action="/update" method="post">
+            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Editar Modelo Equipo</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="equipo_tipo" class="form-control equipo_tipo_modal"
+                                    placeholder="Tipo de equipo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_marcas_equipos" class="form-label">Marca equipo</label>
+                                <input class="form-control equipo_marca_modal" name="equipo_marca"
+                                    list="datalistOptions" id="lista_marcas_equipos" placeholder="Ingresa la marca.."
+                                    required>
+                                <datalist id="datalistOptions">
+                                    {{#each equipos}}
+                                    <option value="{{marca_equipo}}">
+                                        {{/each}}
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                {{!-- <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
+                                    placeholder="Modelo de equipo" required> --}}
+                                <label for="lista_modelos_equipos" class="form-label">Modelo equipo</label>
+                                <input class="form-control equipo_modelo_modal" name="equipo_modelo"
+                                    list="lista_modelos" id="lista_modelos_equipos" placeholder="Ingresa el modelo.."
+                                    required>
+                                <datalist id="lista_modelos">
+                                    {{#each equipos}}
+                                    <option value="{{equipo_modelo}}">
+                                        {{/each}}
+                                </datalist>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="id" class="equipo_id_modal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
+
         </form>
 
 
-{{!-- /EDITAR  --}}
-
-<form action="/update" method="post">
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Editar Producto </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" name="producto_nombre" class=" form-control producto_nombre" placeholder=" Producto Nombre" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="producto_precio" class=" form-control precio" placeholder="Precio" required>
-                </div>
-                <div class="modal-footer">
-                <input type="hidden" name="id" class="producto_id">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
-                </div>
-            </div>
-            </div>
-                        </div>
-
-</form>
-
-
-{{!-- Modal delete --}}
+        {{!-- Modal delete
 
         <form id="add-row-form" action="/delete" method="post">
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Borrar Producto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                    <strong>¿Estás seguro de borrar este elemento?</strong>
-                    </div>
-                    <div class="modal-footer">
-                    <input type="hidden" name="producto_id" class="form-control producto_id2" required>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Borrar Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <strong>¿Estás seguro de borrar este elemento?</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="producto_id" class="form-control producto_id2" required>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             <button type="submit" class="btn btn-success">Eliminar</button>
-                    </div>
                         </div>
+                    </div>
                 </div>
             </div>
-        </form>
+        </form> --}}
 
     </div>
 
-  {{>footerpedidos}}
+    {{>footerpedidos}}
 
 </body>
 
