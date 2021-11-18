@@ -58,6 +58,17 @@ class BackOffice {
                 console.log(err);
             }
         });
+        app.get("/marcas", async function (req, res, next) {
+            let marcassql = "SELECT * FROM marcasequipos";
+            try {
+                const marcas = await querynaty(marcassql);
+                res.render("marcas", {
+                    marcas: marcas,
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        });
     }
 
 

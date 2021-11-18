@@ -1,0 +1,113 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>BackOffice - Biblio de Soft</title>
+</head>
+
+<body>
+    {{>navbarpedidos}}
+    <div class="container justify-content-center">
+        <h2 class="m-3">Equipos</h2>
+        <div class="container w-50">
+            <button class="btn btn-success" data-toggle="modal" data-target="#aniadirmarca">Añadir</button>
+            <table class="table table-striped" id="mitablademarcas">
+                <thead>
+                    <tr>
+                        <th> Marca ID</th>
+                        <th> Marca </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each marcas}}
+                    <tr>
+                        <td> {{ marca_equipo_id}}</td>
+                        <td> {{ marca_equipo}}</td>
+                        <td>
+                            <a href="javascript:editarmarca()" class="btn btn-info edit"
+                                data-id="{{marca_equipo_id}}" data-equipo-marca="{{marca_equipo}}">Editar</a>
+                            {{!-- NO se puede borrar, ya que romperia la tabla de pedidos y modelos --}}
+                        </td>
+                    </tr>
+                    {{/each}}
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+        {{!-- AÑADIR Modal --}}
+
+        {{!-- <form action="/save" method="post">
+            <div class="modal fade" id="modalAddEquipo" tabindex="-1" role="dialog"
+                aria-labelledby="modalAddEquipoLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Añadir Equipo Nuevo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="equipo_modelo" class="form-control" placeholder="Modelo Equipo"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="equipo_marca" class="form-control" placeholder="Marca"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Guardar cambios</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modalAddEquipo">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> --}}
+
+
+        {{!-- /EDITAR --}}
+
+        <form action="/update" method="post">
+            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal_marca_label_id"> Editar Marca</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="marca_equipo" class="form-control marca_equipo_modal"
+                                    placeholder="Marca equipo" required>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="id" class="marca_equipo_id">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    {{>footerpedidos}}
+
+</body>
+
+</html>
