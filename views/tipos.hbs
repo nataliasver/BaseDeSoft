@@ -10,53 +10,51 @@
 <body>
     {{>navbarpedidos}}
     <div class="container justify-content-center">
-        <h2 class="m-3">Marcas de equipos</h2>
+        <h2 class="m-3">Tipos de equipos</h2>
         <div class="container w-75">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddMarca">Añadir</button>
-            <table class="table table-striped" id="mitablademarcas">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddTipo">Añadir</button>
+            <table class="table table-striped" id="mitabladetipos">
                 <thead>
                     <tr>
-                        <th> Marca ID</th>
-                        <th> Marca </th>
+                        <th> Tipo ID</th>
+                        <th> Tipo de equipo </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each marcas}}
+                    {{#each tipos}}
                     <tr>
-                        <td> {{ marca_equipo_id}}</td>
-                        <td> {{ marca_equipo}}</td>
+                        <td> {{ tipo_equipo_id}}</td>
+                        <td> {{ tipo_equipo}}</td>
                         <td>
-                            <a href="javascript:editarmarca()" class="btn btn-info edit" data-id="{{marca_equipo_id}}"
-                                data-marca-equipo="{{marca_equipo}}">Editar</a>
+                            <a href="javascript:editartipo()" class="btn btn-info edit" data-id="{{tipo_equipo_id}}"
+                                data-tipo-equipo="{{tipo_equipo}}">Editar</a>
                             {{!-- NO se puede borrar, ya que romperia la tabla de pedidos y modelos --}}
                         </td>
                     </tr>
                     {{/each}}
-
-
                 </tbody>
             </table>
         </div>
 
         {{!-- AÑADIR Modal --}}
 
-        <form action="/savemarca" method="post">
-            <div class="modal fade" id="AddMarca" tabindex="-1" role="dialog" aria-labelledby="AddMarcaLabel"
+        <form action="/savetipo" method="post">
+            <div class="modal fade" id="AddTipo" tabindex="-1" role="dialog" aria-labelledby="AddTipoLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="AddMarcaLabel">Añadir marca nueva</h5>
+                            <h5 class="modal-title" id="AddTipoLabel">Añadir tipo de equipo nuevo</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <strong>Estas seguro de agregar una marca? No se podrá eliminar una vez
-                                    agregada. Solo se podrá editar</strong>
+                            <strong>Estas seguro de agregar un tipo de equipo? No se podrá eliminar una vez
+                                    agregado. Solo se podrá editar</strong>
                             
                             <div class="form-group mt-4">
-                                <input type="text" name="marca_equipo" class="form-control" placeholder="Marca equipo"
+                                <input type="text" name="tipo_equipo" class="form-control" placeholder="Tipo de equipo"
                                     required>
                             </div>
                         </div>
@@ -72,24 +70,24 @@
 
         {{!-- /EDITAR --}}
 
-        <form action="/updatemarca" method="post">
+        <form action="/updatetipo" method="post">
             <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modal_marca_label_id"> Editar Marca</h5>
+                            <h5 class="modal-title" id="modal_marca_label_id"> Editar tipo de equipo</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" name="marca_equipo" class="form-control marca_equipo_modal"
-                                    placeholder="Marca equipo" required>
+                                <input type="text" name="tipo_equipo" class="form-control tipo_equipo_modal"
+                                    placeholder="Tipo de equipo" required>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden" name="id" class="marca_equipo_id_modal">
+                                <input type="hidden" name="id" class="tipo_equipo_id_modal">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>

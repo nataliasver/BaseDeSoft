@@ -26,7 +26,6 @@ function mostrarDatosOficinas(){
     document.getElementById('emailoficina').removeAttribute('readonly');
 }
 
-
 function abrirmodalparaeditar(){
     //Mostrar datos al modal para editar registro
     $('#mytable').on('click', '.edit', function(){
@@ -41,13 +40,39 @@ function abrirmodalparaeditar(){
         $('.equipo_tipo_modal').val(equipo_tipo);
         $('.equipo_marca_modal').val(equipo_marca);
     })
-    // // Modal DELETE     
-    // $('#mytable').on('click', '.delete', function(){
-    //     let producto_id = $(this).data('id');
-    //     $('#DeleteModal').modal('show');
-    //     $('.producto_id2').val(producto_id);
+}
 
-    // })
+function editarmarca(){
+    //Mostrar datos al modal para editar registro
+    $('#mitablademarcas').on('click', '.edit', function(){
+        let marca_equipo_id = $(this).data('id');
+        let marca_equipo = $(this).data('marca-equipo');
+        $('#EditModal').modal('show');
+        $('.marca_equipo_id_modal').val(marca_equipo_id);
+        $('.marca_equipo_modal').val(marca_equipo);
+    })
+}
+
+function editartipo(){
+    //Mostrar datos al modal para editar registro
+    $('#mitabladetipos').on('click', '.edit', function(){
+        let tipo_equipo_id = $(this).data('id');
+        let tipo_equipo = $(this).data('tipo-equipo');
+        $('#EditModal').modal('show');
+        $('.tipo_equipo_id_modal').val(tipo_equipo_id);
+        $('.tipo_equipo_modal').val(tipo_equipo);
+    })
+}
+
+function editaroficina(){
+    //Mostrar datos al modal para editar registro
+    $('#mitabladetipos').on('click', '.edit', function(){
+        let tipo_equipo_id = $(this).data('id');
+        let tipo_equipo = $(this).data('tipo-equipo');
+        $('#EditModal').modal('show');
+        $('.tipo_equipo_id_modal').val(tipo_equipo_id);
+        $('.tipo_equipo_modal').val(tipo_equipo);
+    })
 }
 
 
