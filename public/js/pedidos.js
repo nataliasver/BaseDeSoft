@@ -66,12 +66,18 @@ function editartipo(){
 
 function editaroficina(){
     //Mostrar datos al modal para editar registro
-    $('#mitabladetipos').on('click', '.edit', function(){
-        let tipo_equipo_id = $(this).data('id');
-        let tipo_equipo = $(this).data('tipo-equipo');
-        $('#EditModal').modal('show');
-        $('.tipo_equipo_id_modal').val(tipo_equipo_id);
-        $('.tipo_equipo_modal').val(tipo_equipo);
+    $('#mitabladeoficinas').on('click', '.edit', function(){
+        let oficina_id = $(this).data('id');
+        let oficina_nombre = $(this).data('oficina-nombre');
+        let oficina_telefono = $(this).data('oficina-telefono');
+        let oficina_direccion = $(this).data('oficina-direccion');
+        let oficina_email = $(this).data('oficina-email');
+        $('#EditOficina').modal('show');
+        $('.oficina_id_modal').val(oficina_id);
+        $('.oficina_nombre_modal').val(oficina_nombre);
+        $('.oficina_direccion_modal').val(oficina_direccion);
+        $('.oficina_telefono_modal').val(oficina_telefono);
+        $('.oficina_email_modal').val(oficina_email);
     })
 }
 

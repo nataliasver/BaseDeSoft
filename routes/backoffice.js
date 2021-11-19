@@ -153,17 +153,19 @@ class BackOffice {
             }
         });
         app.post("/updateoficina", async function (req, res, next) {
-            // let tipossql =
-            //     "UPDATE oficinas SET oficina_nombre='" +
-            //     req.body.tipo_equipo +
-            //     "' WHERE tipo_equipo_id=" +
-            //     req.body.id;
-            // try {
-            //     const updatetipossql = await querynaty(tipossql);
-            //     res.redirect("/tipos");
-            // } catch (err) {
-            //     console.log(err);
-            // }
+            let oficinasql =
+                "UPDATE oficinas SET oficina_nombre='" +
+                req.body.oficina_nombre +
+                "', oficina_direccion='"+ req.body.oficina_direccion +
+                "', oficina_telefono='"+ req.body.oficina_telefono +
+                "', oficina_email='"+ req.body.oficina_email + 
+                "' WHERE oficina_id=" + req.body.id;
+            try {
+                const updateoficinasql = await querynaty(oficinasql);
+                res.redirect("/oficinas");
+            } catch (err) {
+                console.log(err);
+            }
         });
         app.post("/saveoficina", async function (req, res, next) {        
             let data = {
