@@ -6,8 +6,6 @@ class BackOffice {
         const mypassword = 'unaclave'
         let unasession;
 
-        console.log('registra back office')
-
         //---------- Sesiones y back office --------------
         app.get('/office', function (req, res) {
             console.log('pegando a /office')
@@ -53,16 +51,24 @@ class BackOffice {
         //----------------- Equipos ----------------------
         app.get("/equipos", async function (req, res, next) {
             let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+            let marcassql = "SELECT * FROM marcasequipos";
+            let tipossql = "SELECT * FROM tiposequipos";
             try {
                 const equipos = await querynaty(equipossql);
+                const marcas = await querynaty(marcassql);
+                const tipos = await querynaty(tipossql);
                 res.render("equipos", {
                     equipos: equipos,
+                    tipos: tipos,
+                    marcas: marcas,
                 });
             } catch (err) {
                 console.log(err);
             }
         });
-        //To Do: Faltaria añadir equipo, editar equipo, y eliminar equipo
+
+        //To Do: Faltaria añadir equipo, editar equipo
+
         //---------------- Marcas ------------------------
         app.get("/marcas", async function (req, res, next) {
             let marcassql = "SELECT * FROM marcasequipos";

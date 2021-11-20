@@ -26,15 +26,14 @@ function mostrarDatosOficinas(){
     document.getElementById('emailoficina').removeAttribute('readonly');
 }
 
-function abrirmodalparaeditar(){
+function editarmodelo(){
     //Mostrar datos al modal para editar registro
-    $('#mytable').on('click', '.edit', function(){
+    $('#mitabladeequipos').on('click', '.edit', function(){
         let equipo_id = $(this).data('id');
         let equipo_modelo = $(this).data('equipo-modelo');
         let equipo_tipo = $(this).data('equipo-tipo');
         let equipo_marca = $(this).data('equipo-marca');
-        $('#EditModal').modal('show');
-        
+        $('#EditEquipo').modal('show');
         $('.equipo_id_modal').val(equipo_id);
         $('.equipo_modelo_modal').val(equipo_modelo);
         $('.equipo_tipo_modal').val(equipo_tipo);

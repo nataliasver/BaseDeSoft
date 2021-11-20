@@ -14,7 +14,7 @@
         <div class="container">
 
             <button class="btn btn-success" data-toggle="modal" data-target="#aniadirequipo">Añadir</button>
-            <table class="table table-striped" id="mytable">
+            <table class="table table-striped" id="mitabladeequipos">
                 <thead>
                     <tr>
                         <th> Equipo ID</th>
@@ -32,9 +32,9 @@
                         <td> {{ equipo_modelo}}</td>
                         <td>
                         <td>
-                            <a href="javascript:abrirmodalparaeditar()" class="btn btn-info edit"
-                                data-id="{{equipo_id}}" data-equipo-marca="{{marca_equipo}}"
-                                data-equipo-modelo="{{equipo_modelo}}" data-equipo-tipo="{{tipo_equipo}}">Editar</a>
+                            <a href="javascript:editarmodelo()" class="btn btn-info edit" data-id="{{equipo_id}}"
+                                data-equipo-marca="{{marca_equipo_id}}" data-equipo-modelo="{{equipo_modelo}}"
+                                data-equipo-tipo="{{tipo_equipo_id}}">Editar</a>
                             {{!-- <a href="javascript:void(0);" class="btn btn-danger delete"
                                 data-id="{{ producto_id}}"> Borrar</a> --}}
                         </td>
@@ -84,46 +84,45 @@
 
         {{!-- /EDITAR --}}
 
-        <form action="/update" method="post">
-            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <form action="/updateequipo" method="post">
+            <div class="modal fade" id="EditEquipo" tabindex="-1" role="dialog" aria-labelledby="EditEquipoModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Editar Modelo Equipo</h5>
+                            <h5 class="modal-title" id="EditEquipoModalLabel"> Editar Modelo Equipo</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" name="equipo_tipo" class="form-control equipo_tipo_modal"
-                                    placeholder="Tipo de equipo" required>
+                                <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
+                                    placeholder="Modelo de equipo" required>
                             </div>
                             <div class="form-group">
-                                <label for="lista_marcas_equipos" class="form-label">Marca equipo</label>
-                                <input class="form-control equipo_marca_modal" name="equipo_marca"
-                                    list="datalistOptions" id="lista_marcas_equipos" placeholder="Ingresa la marca.."
-                                    required>
-                                <datalist id="datalistOptions">
-                                    {{#each equipos}}
-                                    <option value="{{marca_equipo}}">
-                                        {{/each}}
-                                </datalist>
+                                <label for="lista_tipos_equipos" class="form-label">Tipo de equipo</label>
+                                <select name="tipo_equipo_id" class="form-select equipo_tipo_modal"
+                                    aria-label="lista_tipos_equipos_label">
+                                    {{#each tipos}}
+                                    <option value="{{tipo_equipo_id}}">{{tipo_equipo}}</option>
+                                    {{/each}}
+                                </select>
+
+
                             </div>
                             <div class="form-group">
-                                {{!-- <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
-                                    placeholder="Modelo de equipo" required> --}}
-                                <label for="lista_modelos_equipos" class="form-label">Modelo equipo</label>
-                                <input class="form-control equipo_modelo_modal" name="equipo_modelo"
-                                    list="lista_modelos" id="lista_modelos_equipos" placeholder="Ingresa el modelo.."
-                                    required>
-                                <datalist id="lista_modelos">
-                                    {{#each equipos}}
-                                    <option value="{{equipo_modelo}}">
-                                        {{/each}}
-                                </datalist>
+                                <label for="lista_tipos_equipos" class="form-label">Marca de equipo</label>
+                                <select name="marca_equipo_id" class="form-select equipo_marca_modal"
+                                    aria-label="lista_marcas_equipos_label">
+                                    {{#each marcas}}
+                                    <option value="{{marca_equipo_id}}">{{marca_equipo}}</option>
+                                    {{/each}}
+                                </select>
+
+
                             </div>
+
                             <div class="modal-footer">
                                 <input type="hidden" name="id" class="equipo_id_modal">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -137,30 +136,7 @@
         </form>
 
 
-        {{!-- Modal delete
 
-        <form id="add-row-form" action="/delete" method="post">
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Borrar Producto</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <strong>¿Estás seguro de borrar este elemento?</strong>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="hidden" name="producto_id" class="form-control producto_id2" required>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form> --}}
 
     </div>
 
