@@ -33,21 +33,30 @@ class BackOffice {
 
         // ---------------- Pedidos ----------------------
         app.get('/backoffice', async function (req, res, next) {
-            let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
-            let oficinassql = "SELECT * FROM oficinas"
-            try {
-                const equipos = await querynaty(equipossql);
-                const oficinas = await querynaty(oficinassql);
-                res.render("pedidos", {
-                    results: equipos,
-                    oficinas: oficinas,
-                });
-            } catch (err) {
-                console.log(err);
-            }
-            //res.send(`En contrucción <a href=\'office'>Volver a la home y desloguearse</a>`)
+           let pedidossql = "SELECT * FROM `pedidos` LEFT JOIN equipos ON pedidos.equipo_id_fk = equipos.equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN oficinas ON pedidos.oficina_id_fk = oficinas.oficina_id LEFT JOIN estadosreparacion ON pedidos.estado_id_fk = estadosreparacion.estado_id;"
+           let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+           let marcassql = "SELECT * FROM marcasequipos";
+           let tipossql = "SELECT * FROM tiposequipos";
+           let estadossql = "SELECT * FROM estadosreparacion";
+           try {
+               const pedidos = await querynaty(pedidossql);
+               const equipos = await querynaty(equipossql);
+               const marcas = await querynaty(marcassql);
+               const tipos = await querynaty(tipossql);
+               const estados = await querynaty(estadossql);
+               res.render("backoffice", {
+                   equipos: equipos,
+                   tipos: tipos,
+                   marcas: marcas,
+                   pedidos: pedidos,
+                   estados: estados,
+               });
+           } catch (err) {
+               console.log(err);
+           }
         });
-        //To Do: Faltaria añadir pedido, editar pedido, y eliminar pedido
+
+        //To Do: Faltaria añadir pedido, editar pedido, eliminar pedido y cambio de estado
         //----------------- Equipos ----------------------
         app.get("/equipos", async function (req, res, next) {
             let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";

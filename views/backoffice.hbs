@@ -1,0 +1,171 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>BackOffice - Biblio de Soft</title>
+</head>
+
+<body>
+    {{>navbarpedidos}}
+    <div class="container">
+        <h2>Pedidos</h2>
+        <div class="container">
+
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddPedido">Añadir</button>
+            <table class="table table-striped" id="mitabladeequipos">
+                <thead>
+                    <tr>
+                        <th> Pedido ID</th>
+                        <th> Tipo de equipo </th>
+                        <th> Marca </th>
+                        <th> Modelo equipo</th>
+                        <th> S/n</th>
+                        <th> Oficina </th>
+                        <th> Problema</th>
+                        <th> Estado </th>
+                        <th> Fecha Inicio </th>
+                        <th> Fecha Fin </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each pedidos}}
+                    <tr>
+                        <td> {{ pedido_id}}</td>
+                        <td> {{ tipo_equipo}}</td>
+                        <td> {{ marca_equipo}}</td>
+                        <td> {{ equipo_modelo}}</td>
+                        <td> {{ serial_number}}</td>
+                        <td> {{ oficina_nombre}}</td>
+                        <td> {{ pedido_problema}}</td>
+                        <td> {{ estado_tipo}}</td>
+                        <td> {{ pedido_fecha_inicio}}</td>
+                        <td>
+                        <td>
+                            <a href="javascript:editarpedido()" class="btn btn-info edit" data-id="{{equipo_id}}"
+                                data-equipo-marca="{{marca_equipo_id}}" data-equipo-modelo="{{equipo_modelo}}"
+                                data-equipo-tipo="{{tipo_equipo_id}}">Editar</a>
+                        </td>
+                        <td>
+                            <a href="javascript:cambiodeestadopedido()" class="btn btn-info cambioestado" data-id="{{equipo_id}}"
+                                data-equipo-marca="{{marca_equipo_id}}" data-equipo-modelo="{{equipo_modelo}}"
+                                data-equipo-tipo="{{tipo_equipo_id}}">Estado</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+        {{!-- AÑADIR Modal --}}
+
+        <form action="/saveequipo" method="post">
+            <div class="modal fade" id="AddEquipo" tabindex="-1" role="dialog" aria-labelledby="AddEquipoModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="AddEquipoModalLabel"> Agregar Modelo Equipo</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
+                                    placeholder="Modelo de equipo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_tipos_equipos" class="form-label">Tipo de equipo</label>
+                                <select name="tipo_equipo_id" class="form-select equipo_tipo_modal"
+                                    aria-label="lista_tipos_equipos_label">
+                                    {{#each tipos}}
+                                    <option value="{{tipo_equipo_id}}">{{tipo_equipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_tipos_equipos" class="form-label">Marca de equipo</label>
+                                <select name="marca_equipo_id" class="form-select equipo_marca_modal"
+                                    aria-label="lista_marcas_equipos_label">
+                                    {{#each marcas}}
+                                    <option value="{{marca_equipo_id}}">{{marca_equipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        {{!-- /EDITAR --}}
+
+        <form action="/updateequipo" method="post">
+            <div class="modal fade" id="EditEquipo" tabindex="-1" role="dialog" aria-labelledby="EditEquipoModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="EditEquipoModalLabel"> Editar Modelo Equipo</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
+                                    placeholder="Modelo de equipo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_tipos_equipos" class="form-label">Tipo de equipo</label>
+                                <select name="tipo_equipo_id" class="form-select equipo_tipo_modal"
+                                    aria-label="lista_tipos_equipos_label">
+                                    {{#each tipos}}
+                                    <option value="{{tipo_equipo_id}}">{{tipo_equipo}}</option>
+                                    {{/each}}
+                                </select>
+
+
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_tipos_equipos" class="form-label">Marca de equipo</label>
+                                <select name="marca_equipo_id" class="form-select equipo_marca_modal"
+                                    aria-label="lista_marcas_equipos_label">
+                                    {{#each marcas}}
+                                    <option value="{{marca_equipo_id}}">{{marca_equipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="hidden" name="id" class="equipo_id_modal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+
+
+    </div>
+
+    {{>footerpedidos}}
+
+</body>
+
+</html>
