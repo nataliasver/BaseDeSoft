@@ -66,8 +66,36 @@ class BackOffice {
                 console.log(err);
             }
         });
-
-        //To Do: Faltaria añadir equipo, editar equipo
+        app.post("/updateequipo", async function (req, res, next) {
+            //equipos.marca_equipo_fk equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+            let equipossql =
+                "UPDATE equipos SET marca_equipo_fk='" +
+                req.body.marca_equipo_id +
+                "', tipo_equipo_fk='"+ req.body.tipo_equipo_id +
+                "', equipo_modelo='"+ req.body.equipo_modelo +
+                "' WHERE equipo_id=" +
+                req.body.id;
+            try {
+                const updateequipossql = await querynaty(equipossql);
+                res.redirect("/equipos");
+            } catch (err) {
+                console.log(err);
+            }
+        });
+        app.post("/saveequipo", async function (req, res, next) {
+            let data = {
+                equipo_modelo: req.body.equipo_modelo,
+                tipo_equipo_fk: req.body.tipo_equipo_id,
+                marca_equipo_fk: req.body.marca_equipo_id,
+                };
+                let equiponuevosql = "INSERT INTO equipos SET ?";
+                try {
+                const saveequiposql = await querynaty(equiponuevosql,data);          
+                res.redirect("/equipos");
+            } catch (err) {
+                console.log(err);
+            }
+        });
 
         //---------------- Marcas ------------------------
         app.get("/marcas", async function (req, res, next) {
