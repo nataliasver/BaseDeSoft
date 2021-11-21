@@ -1,10 +1,34 @@
+function getLocale() {
+    if (typeof window === 'undefined' || navigator == null || navigator.language == null) {
+        return 'es-AR'
+    }
+  
+    if (navigator.languages != null) {
+        return navigator.languages[0];
+    }
+  
+    return navigator.language
+  }
+  
+
 class BackOffice {
 
+    static _dateString(date) {
+        date = new Date(date);
+        const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+        const locale = getLocale();
+    
+        const dateStr = date.toLocaleDateString(locale, options);
+    
+        return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
     //Para la sesion
     static init(app, querynaty) {
         const myusername = 'soporte'
         const mypassword = 'unaclave'
         let unasession;
+
+       
 
         //---------- Sesiones y back office --------------
         app.get('/office', function (req, res) {
@@ -32,31 +56,42 @@ class BackOffice {
 
 
         // ---------------- Pedidos ----------------------
+        
         app.get('/backoffice', async function (req, res, next) {
-           let pedidossql = "SELECT * FROM `pedidos` LEFT JOIN equipos ON pedidos.equipo_id_fk = equipos.equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN oficinas ON pedidos.oficina_id_fk = oficinas.oficina_id LEFT JOIN estadosreparacion ON pedidos.estado_id_fk = estadosreparacion.estado_id;"
-           let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
-           let marcassql = "SELECT * FROM marcasequipos";
-           let tipossql = "SELECT * FROM tiposequipos";
-           let estadossql = "SELECT * FROM estadosreparacion";
-           try {
-               const pedidos = await querynaty(pedidossql);
-               const equipos = await querynaty(equipossql);
-               const marcas = await querynaty(marcassql);
-               const tipos = await querynaty(tipossql);
-               const estados = await querynaty(estadossql);
-               res.render("backoffice", {
-                   equipos: equipos,
-                   tipos: tipos,
-                   marcas: marcas,
-                   pedidos: pedidos,
-                   estados: estados,
-               });
-           } catch (err) {
-               console.log(err);
-           }
-        });
+            let pedidossql = "SELECT * FROM `pedidos` LEFT JOIN equipos ON pedidos.equipo_id_fk = equipos.equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN oficinas ON pedidos.oficina_id_fk = oficinas.oficina_id LEFT JOIN estadosreparacion ON pedidos.estado_id_fk = estadosreparacion.estado_id;"
+            let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
+            let marcassql = "SELECT * FROM marcasequipos";
+            let tipossql = "SELECT * FROM tiposequipos";
+            let estadossql = "SELECT * FROM estadosreparacion";
+            try {
+                const pedidos = await querynaty(pedidossql);
+                const equipos = await querynaty(equipossql);
+                const marcas = await querynaty(marcassql);
+                const tipos = await querynaty(tipossql);
+                const estados = await querynaty(estadossql);
+                res.render("backoffice", {
+                    equipos: equipos,
+                    tipos: tipos,
+                    marcas: marcas,
+                    pedidos: pedidos.map(pedido => ({...pedido, pedido_fecha_inicio: BackOffice._dateString(pedido.pedido_fecha_inicio)})),
+                    estados: estados,
+                });
+            } catch (err) {
+                console.log(err);
+            }
+         });
+        app.post('/deletepedido', async function (req, res, next) {
+            let deletepedidosql = "DELETE FROM pedidos WHERE pedido_id=" + req.body.id + "";
+            try {
+                const deletepedido = await querynaty(deletepedidosql);
+                res.redirect("/backoffice");
+            } catch (err) {
+                console.log(err);
+            }
+         });
 
-        //To Do: Faltaria añadir pedido, editar pedido, eliminar pedido y cambio de estado
+        
+        //To Do: Faltaria añadir pedido, editar pedido y cambio de estado
         //----------------- Equipos ----------------------
         app.get("/equipos", async function (req, res, next) {
             let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";

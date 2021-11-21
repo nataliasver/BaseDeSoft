@@ -10,9 +10,11 @@
 <body>
     {{>navbarpedidos}}
     <div class="container justify-content-center">
-        <h2 class="m-3">Tipos de equipos</h2>
+        <div class="d-flex justify-content-center m-3">
+            <h2>Tipos de equipos</h2>
+            <button class="ms-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#AddTipo">Añadir</button>
+        </div>
         <div class="container w-75">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddTipo">Añadir</button>
             <table class="table table-striped" id="mitabladetipos">
                 <thead>
                     <tr>

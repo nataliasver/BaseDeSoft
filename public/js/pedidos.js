@@ -26,6 +26,16 @@ function mostrarDatosOficinas(){
     document.getElementById('emailoficina').removeAttribute('readonly');
 }
 
+function eliminarpedido(){
+    //Mostrar datos al modal para editar registro
+    $('#mitabladepedidos').on('click', '.eliminarpedido', function(){
+        let pedido_id = $(this).data('id');
+        $('#DeletePedido').modal('show');
+        $('.pedido_id_modal').val(pedido_id);
+        console.log(pedido_id)
+    })
+}
+
 function editarmodelo(){
     //Mostrar datos al modal para editar registro
     $('#mitabladeequipos').on('click', '.edit', function(){

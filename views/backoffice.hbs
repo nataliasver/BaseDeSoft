@@ -10,11 +10,12 @@
 <body>
     {{>navbarpedidos}}
     <div class="container">
-        <h2>Pedidos</h2>
+        <div class="d-flex justify-content-center m-3">
+            <h2>Pedidos de reparación</h2>
+            <button class="ms-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#AddPedido">Añadir</button>
+        </div>
         <div class="container">
-
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddPedido">Añadir</button>
-            <table class="table table-striped" id="mitabladeequipos">
+            <table class="table table-striped" id="mitabladepedidos">
                 <thead>
                     <tr>
                         <th> Pedido ID</th>
@@ -48,9 +49,13 @@
                                 data-equipo-tipo="{{tipo_equipo_id}}">Editar</a>
                         </td>
                         <td>
-                            <a href="javascript:cambiodeestadopedido()" class="btn btn-info cambioestado" data-id="{{equipo_id}}"
-                                data-equipo-marca="{{marca_equipo_id}}" data-equipo-modelo="{{equipo_modelo}}"
-                                data-equipo-tipo="{{tipo_equipo_id}}">Estado</a>
+                            <a href="javascript:cambiodeestadopedido()" class="btn btn-info cambioestado"
+                                data-id="{{equipo_id}}" data-equipo-marca="{{marca_equipo_id}}"
+                                data-equipo-modelo="{{equipo_modelo}}" data-equipo-tipo="{{tipo_equipo_id}}">Estado</a>
+                        </td>
+                        <td>
+                            <a href="javascript:eliminarpedido()" class="btn btn-danger eliminarpedido"
+                                data-id="{{pedido_id}}">Eliminar</a>
                         </td>
                     </tr>
                     {{/each}}
@@ -61,15 +66,14 @@
         </div>
 
 
-        {{!-- AÑADIR Modal --}}
-
-        <form action="/saveequipo" method="post">
-            <div class="modal fade" id="AddEquipo" tabindex="-1" role="dialog" aria-labelledby="AddEquipoModalLabel"
+        {{!-------------------- AÑADIR Modal ---------------------}}
+        <form action="/savepedido" method="post">
+            <div class="modal fade" id="AddPedido" tabindex="-1" role="dialog" aria-labelledby="AddPedidoModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="AddEquipoModalLabel"> Agregar Modelo Equipo</h5>
+                            <h5 class="modal-title" id="AddEquipoModalLabel"> Agregar Pedido</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -107,9 +111,7 @@
             </div>
         </form>
 
-
-        {{!-- /EDITAR --}}
-
+        {{!-------------------- Editar Modal ---------------------}}
         <form action="/updateequipo" method="post">
             <div class="modal fade" id="EditEquipo" tabindex="-1" role="dialog" aria-labelledby="EditEquipoModalLabel"
                 aria-hidden="true">
@@ -159,6 +161,30 @@
 
         </form>
 
+        {{!-------------------- Eliminar modal -------------------}}
+        <form action="/deletepedido" method="post">
+            <div class="modal fade" id="DeletePedido" tabindex="-1" role="dialog" aria-labelledby="DeletePedidoLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="DeletePedidoLabel">Eliminar Pedido</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <strong>¿Estás seguro de eliminar este pedido? se perderan todos los datos del
+                                mismo</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="id" class="form-control pedido_id_modal" required>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-success">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
 
 
