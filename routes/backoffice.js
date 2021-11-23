@@ -141,11 +141,12 @@ class BackOffice {
                 console.log(err);
             }
         });
+
         app.post("/updateestadopedido", async function (req, res, next) {
             let estado = req.body.estado_id
             let diadehoy = BackOffice._datetoday();
             let pedidosql;
-            if (estado) { //ESTADO FINALIZADO
+            if (estado === '5' || estado === '2'|| estado === '4') { //ESTADO FINALIZADO
                 pedidosql =
                     "UPDATE pedidos SET pedido_fecha_finalizacion='" +
                     diadehoy +
@@ -166,10 +167,9 @@ class BackOffice {
             }
         });
 
+        //To Do: Falta email
 
-
-        //To Do: Faltaria cambio de estado
-        //----------------- Equipos ----------------------
+        //------------------------------ Equipos --------------------------------------
         app.get("/equipos", async function (req, res, next) {
             let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
             let marcassql = "SELECT * FROM marcasequipos";

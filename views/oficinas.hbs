@@ -10,11 +10,11 @@
 <body>
     {{>navbarpedidos}}
     <div class="container">
-        <h2 class="text-center m-3">Oficinas</h2>
-        
+        <div class="d-flex justify-content-center m-3">
+            <h2>Oficinas</h2>
+            <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#AddOficina">Nueva oficina</button>
+        </div>
         <div class="container">
-
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddOficina">Añadir</button>
             <table class="table table-striped" id="mitabladeoficinas">
                 <thead>
                     <tr>
@@ -46,8 +46,7 @@
             </table>
         </div>
 
-        {{!-- AÑADIR Modal --}}
-
+        {{!-- AÑADIR Oficina Modal --}}
         <form action="/saveoficina" method="post">
             <div class="modal fade" id="AddOficina" tabindex="-1" role="dialog" aria-labelledby="AddOficinaLabel"
                 aria-hidden="true">
@@ -82,8 +81,8 @@
                 </div>
             </div>
         </form>
-        {{!-- Editar Modal --}}
 
+        {{!-- Editar Oficina Modal --}}
         <form action="/updateoficina" method="post">
             <div class="modal fade" id="EditOficina" tabindex="-1" role="dialog" aria-labelledby="EditOficinaLabel"
                 aria-hidden="true">

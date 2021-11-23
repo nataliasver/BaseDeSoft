@@ -10,10 +10,11 @@
 <body>
     {{>navbarpedidos}}
     <div class="container">
-        <h2 class="text-center m-3">Equipos</h2>
+        <div class="d-flex justify-content-center m-3">
+            <h2>Equipos</h2>
+            <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#AddEquipo">Nuevo equipo</button>
+        </div>
         <div class="container">
-
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddEquipo">Añadir</button>
             <table class="table table-striped" id="mitabladeequipos">
                 <thead>
                     <tr>
@@ -44,8 +45,7 @@
             </table>
         </div>
 
-
-        {{!-- AÑADIR Modal --}}
+        {{!-- AÑADIR Equipo Modal --}}
 
         <form action="/saveequipo" method="post">
             <div class="modal fade" id="AddEquipo" tabindex="-1" role="dialog" aria-labelledby="AddEquipoModalLabel"
@@ -91,8 +91,7 @@
             </div>
         </form>
 
-
-        {{!-- /EDITAR --}}
+        {{!-- EDITAR Equipo Modal --}}
 
         <form action="/updateequipo" method="post">
             <div class="modal fade" id="EditEquipo" tabindex="-1" role="dialog" aria-labelledby="EditEquipoModalLabel"
@@ -142,9 +141,6 @@
             </div>
 
         </form>
-
-
-
 
     </div>
 

@@ -10,9 +10,12 @@
 <body>
     {{>navbarpedidos}}
     <div class="container justify-content-center">
-        <h2  class="text-center m-3"">Marcas de equipos</h2>
+        <div class="d-flex justify-content-center m-3">
+            <h2>Marcas de equipos</h2>
+            <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#AddMarca">Nueva marca</button>
+        </div>
         <div class="container w-75">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddMarca">Añadir</button>
+
             <table class="table table-striped" id="mitablademarcas">
                 <thead>
                     <tr>
@@ -38,7 +41,7 @@
             </table>
         </div>
 
-        {{!-- AÑADIR Modal --}}
+        {{!-- AÑADIR Marca Modal --}}
 
         <form action="/savemarca" method="post">
             <div class="modal fade" id="AddMarca" tabindex="-1" role="dialog" aria-labelledby="AddMarcaLabel"
@@ -53,8 +56,8 @@
                         </div>
                         <div class="modal-body">
                             <strong>Estas seguro de agregar una marca? No se podrá eliminar una vez
-                                    agregada. Solo se podrá editar</strong>
-                            
+                                agregada. Solo se podrá editar</strong>
+
                             <div class="form-group mt-4">
                                 <input type="text" name="marca_equipo" class="form-control" placeholder="Marca equipo"
                                     required>
@@ -69,8 +72,7 @@
             </div>
         </form>
 
-
-        {{!-- /EDITAR --}}
+        {{!-- EDITAR Marca --}}
 
         <form action="/updatemarca" method="post">
             <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

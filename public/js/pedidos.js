@@ -35,6 +35,7 @@ function eliminarpedido(){
         console.log(pedido_id)
     })
 }
+
 function cambiodeestadopedido(){
     $('#mitabladepedidos').on('click', '.cambioestado', function(){
         let pedido_id = $(this).data('id');
@@ -44,6 +45,7 @@ function cambiodeestadopedido(){
         $('.pedido_id_modal').val(pedido_id);
     })
 }
+
 function editarpedido(){
     $('#mitabladepedidos').on('click', '.edit', function(){
         let pedido_id = $(this).data('id');
