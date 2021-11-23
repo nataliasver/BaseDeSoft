@@ -35,6 +35,30 @@ function eliminarpedido(){
         console.log(pedido_id)
     })
 }
+function cambiodeestadopedido(){
+    $('#mitabladepedidos').on('click', '.cambioestado', function(){
+        let pedido_id = $(this).data('id');
+        let estado_id = $(this).data('estado-id');
+        $('#EditEstadoPedido').modal('show');
+        $('.estado_id_modal').val(estado_id);
+        $('.pedido_id_modal').val(pedido_id);
+    })
+}
+function editarpedido(){
+    $('#mitabladepedidos').on('click', '.edit', function(){
+        let pedido_id = $(this).data('id');
+        let equipo_id = $(this).data('equipo-id');
+        let oficina_id = $(this).data('oficina-id');
+        let serial_number = $(this).data('serial-number');
+        let pedido_problema = $(this).data('pedido-problema');
+        $('#EditPedido').modal('show');
+        $('.equipo_id_modal').val(equipo_id);
+        $('.serial_number_modal').val(serial_number);
+        $('.oficina_id_modal').val(oficina_id);
+        $('.problema_modal').val(pedido_problema);
+        $('.pedido_id_modal').val(pedido_id);
+    })
+}
 
 function editarmodelo(){
     //Mostrar datos al modal para editar registro

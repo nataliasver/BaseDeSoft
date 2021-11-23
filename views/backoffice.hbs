@@ -12,7 +12,8 @@
     <div class="container">
         <div class="d-flex justify-content-center m-3">
             <h2>Pedidos de reparación</h2>
-            <button class="ms-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#AddPedido">Iniciar Pedido</button>
+            <button class="ms-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#AddPedido">Iniciar
+                Pedido</button>
         </div>
         <div class="container">
             <table class="table table-striped" id="mitabladepedidos">
@@ -42,16 +43,16 @@
                         <td> {{ pedido_problema}}</td>
                         <td> {{ estado_tipo}}</td>
                         <td> {{ pedido_fecha_inicio}}</td>
+                        <td> {{ pedido_fecha_finalizacion}}</td>
                         <td>
-                        <td>
-                            <a href="javascript:editarpedido()" class="btn btn-info edit" data-id="{{equipo_id}}"
-                                data-equipo-marca="{{marca_equipo_id}}" data-equipo-modelo="{{equipo_modelo}}"
-                                data-equipo-tipo="{{tipo_equipo_id}}">Editar</a>
+                            <a href="javascript:editarpedido()" class="btn btn-info edit" data-id="{{pedido_id}}"
+                                data-equipo-id="{{equipo_id_fk}}" data-oficina-id="{{oficina_id_fk}}"
+                                data-estado-id="{{estado_id_fk}}" data-serial-number="{{serial_number}}"
+                                data-pedido-problema="{{pedido_problema}}">Editar</a>
                         </td>
                         <td>
                             <a href="javascript:cambiodeestadopedido()" class="btn btn-info cambioestado"
-                                data-id="{{equipo_id}}" data-equipo-marca="{{marca_equipo_id}}"
-                                data-equipo-modelo="{{equipo_modelo}}" data-equipo-tipo="{{tipo_equipo_id}}">Estado</a>
+                                data-id="{{pedido_id}}" data-estado-id="{{estado_id_fk}}">Estado</a>
                         </td>
                         <td>
                             <a href="javascript:eliminarpedido()" class="btn btn-danger eliminarpedido"
@@ -90,21 +91,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="equipos" class="form-label">Modelo equipo</label>
-                                <select name="equipo_id" class="form-select equipo_id_modal"
-                                    aria-label="equipo_label">
+                                <select name="equipo_id" class="form-select equipo_id_modal" aria-label="equipo_label">
                                     {{#each equipos}}
                                     <option value="{{equipo_id}}">{{equipo_modelo}}</option>
                                     {{/each}}
                                 </select>
                             </div>
-                             <div class="form-group">
-                                 <label for="serial_number" class="form-label">Numero de serie</label>
+                            <div class="form-group">
+                                <label for="serial_number" class="form-label">Numero de serie</label>
                                 <input type="text" name="serial_number" class="form-control serial_number_modal"
                                     placeholder="Ingrese serial del equipo..." required>
                             </div>
 
-                             <div class="form-group">
-                                 <label for="problema" class="form-label">Descripcion del problema</label>
+                            <div class="form-group">
+                                <label for="problema" class="form-label">Descripcion del problema</label>
                                 <textarea type="text" name="problema" class="form-control problema_modal"
                                     placeholder="Ingrese la descripción del problema..." required></textarea>
                             </div>
@@ -120,45 +120,60 @@
         </form>
 
         {{!-------------------- Editar Modal ---------------------}}
-        <form action="/updateequipo" method="post">
-            <div class="modal fade" id="EditEquipo" tabindex="-1" role="dialog" aria-labelledby="EditEquipoModalLabel"
+        <form action="/updatepedido" method="post">
+            <div class="modal fade" id="EditPedido" tabindex="-1" role="dialog" aria-labelledby="EditPedidoModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="EditEquipoModalLabel"> Editar Modelo Equipo</h5>
+                            <h5 class="modal-title" id="EditPedidoModalLabel"> Editar Pedido</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" name="equipo_modelo" class="form-control equipo_modelo_modal"
-                                    placeholder="Modelo de equipo" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lista_tipos_equipos" class="form-label">Tipo de equipo</label>
-                                <select name="tipo_equipo_id" class="form-select equipo_tipo_modal"
-                                    aria-label="lista_tipos_equipos_label">
-                                    {{#each tipos}}
-                                    <option value="{{tipo_equipo_id}}">{{tipo_equipo}}</option>
-                                    {{/each}}
-                                </select>
-
-
-                            </div>
-                            <div class="form-group">
-                                <label for="lista_tipos_equipos" class="form-label">Marca de equipo</label>
-                                <select name="marca_equipo_id" class="form-select equipo_marca_modal"
-                                    aria-label="lista_marcas_equipos_label">
-                                    {{#each marcas}}
-                                    <option value="{{marca_equipo_id}}">{{marca_equipo}}</option>
+                                <label for="lista_modelos_equipos" class="form-label">Modelo de equipo</label>
+                                <select name="equipo_id" class="form-select equipo_id_modal"
+                                    aria-label="lista_modelos_equipos_label">
+                                    {{#each equipos}}
+                                    <option value="{{equipo_id}}">{{equipo_modelo}}</option>
                                     {{/each}}
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="serial_number" class="form-label">Numero de serie</label>
+                                <input type="text" name="serial_number" class="form-control serial_number_modal"
+                                    placeholder="Ingrese serial del equipo..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lista_oficinas" class="form-label">Oficina</label>
+                                <select name="oficina_id" class="form-select oficina_id_modal"
+                                    aria-label="lista_oficinas_label">
+                                    {{#each oficinas}}
+                                    <option value="{{oficina_id}}">{{oficina_nombre}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="problema" class="form-label">Descripción del problema</label>
+                                <textarea type="text" name="problema" class="form-control problema_modal"
+                                    placeholder="Ingrese la descripción del problema..." required></textarea>
+                            </div>
+                            {{!--Se deberia editar el estado desde cambio de estado
+                            <div class="form-group">
+                                <label for="lista_estados" class="form-label">Estado</label>
+                                <select name="estado_id" class="form-select estado_modal"
+                                    aria-label="lista_oficinas_label">
+                                    {{#each estados}}
+                                    <option value="{{estado_id}}">{{estado_tipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div> --}}
 
                             <div class="modal-footer">
-                                <input type="hidden" name="id" class="equipo_id_modal">
+                                <input type="hidden" name="id" class="pedido_id_modal">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>
@@ -169,6 +184,47 @@
 
         </form>
 
+        {{!-------------------- Editar Estado Modal ---------------------}}
+        <form action="/updateestadopedido" method="post">
+            <div class="modal fade" id="EditEstadoPedido" tabindex="-1" role="dialog" aria-labelledby="EditEstadoPedidoModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="EditEstadoPedidoModalLabel"> Editar estado Pedido</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="id" class="form-label">Numero de pedido</label>
+                                <input class="form-control pedido_id_modal" name="id" type="text" value=""
+                                    aria-label="Id Pedido" readonly>
+                            </div>
+            
+                            
+                            <div class="form-group">
+                                <label for="lista_estados" class="form-label">Estado</label>
+                                <select name="estado_id" class="form-select estado_id_modal"
+                                    aria-label="lista_oficinas_label">
+                                    {{#each estados}}
+                                    <option value="{{estado_id}}">{{estado_tipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div> 
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
         {{!-------------------- Eliminar modal -------------------}}
         <form action="/deletepedido" method="post">
             <div class="modal fade" id="DeletePedido" tabindex="-1" role="dialog" aria-labelledby="DeletePedidoLabel"

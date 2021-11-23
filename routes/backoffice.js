@@ -14,6 +14,9 @@ function getLocale() {
 class BackOffice {
 
     static _dateString(date) {
+        if(date == "0000-00-00"){
+            return '-';
+        }
         date = new Date(date);
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         const locale = getLocale();
@@ -21,6 +24,14 @@ class BackOffice {
         const dateStr = date.toLocaleDateString(locale, options);
 
         return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
+    static _datetoday() {
+        const date = Date.now();
+        let date_ob = new Date(date);
+        let dateday = date_ob.getDate();
+        let month = date_ob.getMonth() + 1;
+        let year = date_ob.getFullYear();
+        return year + "-" + month + "-" + dateday
     }
     //Para la sesion
     static init(app, querynaty) {
@@ -76,7 +87,7 @@ class BackOffice {
                     oficinas: oficinas,
                     tipos: tipos,
                     marcas: marcas,
-                    pedidos: pedidos.map(pedido => ({ ...pedido, pedido_fecha_inicio: BackOffice._dateString(pedido.pedido_fecha_inicio) })),
+                    pedidos: pedidos.map(pedido => ({ ...pedido, pedido_fecha_inicio: BackOffice._dateString(pedido.pedido_fecha_inicio), pedido_fecha_finalizacion: BackOffice._dateString(pedido.pedido_fecha_finalizacion) })),
                     estados: estados,
                 });
             } catch (err) {
@@ -85,19 +96,14 @@ class BackOffice {
         });
 
         app.post("/savepedido", async function (req, res, next) {
-            const date = Date.now();
-            let date_ob = new Date(date);
-            let dateday = date_ob.getDate();
-            let month = date_ob.getMonth() + 1;
-            let year = date_ob.getFullYear();
-            let datetoday = year + "-" + month + "-" + dateday
-
+            let diadehoy = BackOffice._datetoday();
+            console.log(BackOffice._datetoday())
             let data = {
                 equipo_id_fk: req.body.equipo_id,
                 serial_number: req.body.serial_number,
                 oficina_id_fk: req.body.oficina_id,
                 pedido_problema: req.body.problema,
-                pedido_fecha_inicio: datetoday,
+                pedido_fecha_inicio: diadehoy,
                 estado_id_fk: 1,
             };
             let pedidonuevosql = "INSERT INTO pedidos SET ?";
@@ -119,8 +125,50 @@ class BackOffice {
             }
         });
 
+        app.post("/updatepedido", async function (req, res, next) {
+            let pedidosql =
+                "UPDATE pedidos SET equipo_id_fk='" +
+                req.body.equipo_id +
+                "', serial_number='" + req.body.serial_number +
+                "', oficina_id_fk='" + req.body.oficina_id +
+                "', pedido_problema='" + req.body.problema +
+                "' WHERE pedido_id=" +
+                req.body.id;
+            try {
+                const updatepedidossql = await querynaty(pedidosql);
+                res.redirect("/backoffice");
+            } catch (err) {
+                console.log(err);
+            }
+        });
+        app.post("/updateestadopedido", async function (req, res, next) {
+            let estado = req.body.estado_id
+            let diadehoy = BackOffice._datetoday();
+            let pedidosql;
+            if (estado) { //ESTADO FINALIZADO
+                pedidosql =
+                    "UPDATE pedidos SET pedido_fecha_finalizacion='" +
+                    diadehoy +
+                    "', estado_id_fk='" + estado +
+                    "' WHERE pedido_id=" +
+                    req.body.id;
+            } else {
+                pedidosql =
+                    "UPDATE pedidos SET estado_id_fk='" + estado +
+                    "' WHERE pedido_id=" +
+                    req.body.id;
+            }
+            try {
+                const updatepedidossql = await querynaty(pedidosql);
+                res.redirect("/backoffice");
+            } catch (err) {
+                console.log(err);
+            }
+        });
 
-        //To Do: Faltaria añadir pedido, editar pedido y cambio de estado
+
+
+        //To Do: Faltaria cambio de estado
         //----------------- Equipos ----------------------
         app.get("/equipos", async function (req, res, next) {
             let equipossql = "SELECT * FROM equipos LEFT JOIN marcasequipos ON equipos.marca_equipo_fk = marcasequipos.marca_equipo_id LEFT JOIN tiposequipos ON equipos.tipo_equipo_fk = tiposequipos.tipo_equipo_id";
@@ -155,6 +203,7 @@ class BackOffice {
                 console.log(err);
             }
         });
+
         app.post("/saveequipo", async function (req, res, next) {
             let data = {
                 equipo_modelo: req.body.equipo_modelo,
