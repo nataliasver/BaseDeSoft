@@ -109,7 +109,7 @@ class BackOffice {
                 estado_id_fk: 1,
             };
             let correosend={
-                correo: 'uncorreo@gmail.com',
+                correo: req.body.oficina_email,
                 estado: '1',
             }
             let pedidonuevosql = "INSERT INTO pedidos SET ?";

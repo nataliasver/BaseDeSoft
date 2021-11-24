@@ -1,13 +1,27 @@
-function mostrarDatos(){
-    if(document.getElementById('exampleDataList').value === ''){
-        document.getElementById('tipoequipo').setAttribute('value', '')
-        document.getElementById('marcaequipo').setAttribute('value', '')
+function mostraroficina(){
+    if(document.getElementById('oficina_id_onchange').value === ''){
+        document.getElementById('oficina_direccion_onchange').setAttribute('value', '')
+        document.getElementById('oficina_email_onchange').setAttribute('value', '')
+    }else{
+    const data = JSON.parse($("#oficinas").val())
+    console.log(data)
+    const oficina = document.getElementById('oficina_id_onchange').value
+    console.log(oficina)
+    const oficina_filtrada = data.filter(unaoficina => unaoficina.oficina_id == oficina );
+    console.log(oficina_filtrada);
+    document.getElementById('oficina_direccion_onchange').setAttribute('value', oficina_filtrada[0].oficina_direccion)
+    document.getElementById('oficina_email_onchange').setAttribute('value', oficina_filtrada[0].oficina_email)
     }
-    const data = JSON.parse($("#results").val())
-    const equipo = document.getElementById('exampleDataList').value
-    const equipofiltrado = data.filter(unequipo => unequipo.equipo_modelo === equipo );
-    document.getElementById('tipoequipo').setAttribute('value', equipofiltrado[0].tipo_equipo)
-    document.getElementById('marcaequipo').setAttribute('value', equipofiltrado[0].marca_equipo)
+}
+
+function verificaraniadirpedido(){
+    if(document.getElementById('oficina_id_onchange').value === ''){
+        alert('Debe seleccionar una oficina!');
+        return false;
+    }else{
+        return true;
+    }
+    
 }
 
 function mostrarDatosOficinas(){

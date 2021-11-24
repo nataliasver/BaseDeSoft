@@ -66,7 +66,7 @@
         </div>
 
         {{!-------------------- AÑADIR pedido Modal ---------------------}}
-        <form action="/savepedido" method="post">
+        <form action="/savepedido" method="post" onsubmit="return verificaraniadirpedido()">
             <div class="modal fade" id="AddPedido" tabindex="-1" role="dialog" aria-labelledby="AddPedidoModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -79,14 +79,26 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="oficinas" class="form-label">Oficina</label>
-                                <select name="oficina_id" class="form-select oficina_id_modal"
+                                <input id="oficinas" value='{{{json oficinas}}}'  type="hidden"/>
+                                <label for="oficina_id" class="form-label">Oficina</label>
+                                <select onchange="mostraroficina();" name="oficina_id" id="oficina_id_onchange" class="form-select oficina_id_modal"
                                     aria-label="oficinas_label">
+                                    <option value="">--</option>
                                     {{#each oficinas}}
                                     <option value="{{oficina_id}}">{{oficina_nombre}}</option>
                                     {{/each}}
                                 </select>
+
+                                <label for="oficina_direccion" class="form-label">Direccion</label>
+                                <input class="form-control oficina_direccion_modal" name="oficina_direccion" id="oficina_direccion_onchange" type="text" value=""
+                                    aria-label="direccion"readonly="readonly" required>
+                            
+                                <label for="oficina_email" class="form-label">Email</label>
+                                <input class="form-control oficina_email_modal" name="oficina_email" id="oficina_email_onchange"  type="text" value=""
+                                    aria-label="Email" readonly="readonly" required>
                             </div>
+                      
+
                             <div class="form-group">
                                 <label for="equipos" class="form-label">Modelo equipo</label>
                                 <select name="equipo_id" class="form-select equipo_id_modal" aria-label="equipo_label">
