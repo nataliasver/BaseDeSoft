@@ -39,12 +39,20 @@ class App {
       resave: false 
     }));
 
-    //base de datos
+    // //base de datos Local
+    // const conn = mysql.createConnection({
+    //   host: "localhost",
+    //   user: "root",
+    //   password: "",
+    //   database: "natalia_verdura",
+    // });
+
     const conn = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "natalia_verdura",
+      host: "ckshdphy86qnz0bj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+      user: "l3n0rh1p6bv2od0c",
+      password: "lfiryrho6mn0x7hg",
+      port: 3306,
+      database: "n17u7bxcmrunuwfj",
     });
     
     //Con esto convierto en una promise las querys, asi puedo hacer varios llamados
