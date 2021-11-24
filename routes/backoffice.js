@@ -1,3 +1,5 @@
+const email = require('./email');
+
 function getLocale() {
     if (typeof window === 'undefined' || navigator == null || navigator.language == null) {
         return 'es-AR'
@@ -143,16 +145,20 @@ class BackOffice {
         });
 
         app.post("/updateestadopedido", async function (req, res, next) {
-            let estado = req.body.estado_id
+            let estado = req.body.estado_id;
             let diadehoy = BackOffice._datetoday();
             let pedidosql;
+            let correo = {
+                correo: 'uncorreodeprueba@gmail.com',
+                estado: estado,
+            }
             if (estado === '5' || estado === '2'|| estado === '4') { //ESTADO FINALIZADO
                 pedidosql =
                     "UPDATE pedidos SET pedido_fecha_finalizacion='" +
                     diadehoy +
                     "', estado_id_fk='" + estado +
                     "' WHERE pedido_id=" +
-                    req.body.id;
+                    req.body.id;  
             } else {
                 pedidosql =
                     "UPDATE pedidos SET estado_id_fk='" + estado +
@@ -161,6 +167,7 @@ class BackOffice {
             }
             try {
                 const updatepedidossql = await querynaty(pedidosql);
+                email.sendEmailReparacion(correo, res);
                 res.redirect("/backoffice");
             } catch (err) {
                 console.log(err);
