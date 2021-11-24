@@ -46,7 +46,7 @@
                         <td> {{ pedido_fecha_finalizacion}}</td>
                          <td>
                             <a href="javascript:cambiodeestadopedido()" class="btn btn-info cambioestado"
-                                data-id="{{pedido_id}}" data-estado-id="{{estado_id_fk}}">Estado</a>
+                                data-id="{{pedido_id}}" data-estado-id="{{estado_id_fk}}" data-email="{{oficina_email}}">Estado</a>
                         </td>
                         <td>
                             <a href="javascript:editarpedido()" class="btn btn-info edit" data-id="{{pedido_id}}"
@@ -210,6 +210,11 @@
                                     {{/each}}
                                 </select>
                             </div> 
+                            <div class="form-group">
+                                <label for="oficina_email" class="form-label">Email</label>
+                                <input class="form-control oficina_email_modal" name="oficina_email" type="text" value=""
+                                    aria-label="Email" readonly>
+                            </div>    
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>

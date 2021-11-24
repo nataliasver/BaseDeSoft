@@ -40,9 +40,11 @@ function cambiodeestadopedido(){
     $('#mitabladepedidos').on('click', '.cambioestado', function(){
         let pedido_id = $(this).data('id');
         let estado_id = $(this).data('estado-id');
+        let oficina_email = $(this).data('email');
         $('#EditEstadoPedido').modal('show');
         $('.estado_id_modal').val(estado_id);
         $('.pedido_id_modal').val(pedido_id);
+        $('.oficina_email_modal').val(oficina_email);
     })
 }
 

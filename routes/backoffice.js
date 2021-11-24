@@ -108,9 +108,14 @@ class BackOffice {
                 pedido_fecha_inicio: diadehoy,
                 estado_id_fk: 1,
             };
+            let correosend={
+                correo: 'uncorreo@gmail.com',
+                estado: '1',
+            }
             let pedidonuevosql = "INSERT INTO pedidos SET ?";
             try {
                 const saveequiposql = await querynaty(pedidonuevosql, data);
+                email.sendEmailReparacion(correosend, res);
                 res.redirect("/backoffice");
             } catch (err) {
                 console.log(err);
@@ -147,9 +152,10 @@ class BackOffice {
         app.post("/updateestadopedido", async function (req, res, next) {
             let estado = req.body.estado_id;
             let diadehoy = BackOffice._datetoday();
+            let correooficina = req.body.oficina_email
             let pedidosql;
             let correo = {
-                correo: 'uncorreodeprueba@gmail.com',
+                correo: correooficina,
                 estado: estado,
             }
             if (estado === '5' || estado === '2'|| estado === '4') { //ESTADO FINALIZADO
@@ -173,8 +179,6 @@ class BackOffice {
                 console.log(err);
             }
         });
-
-        //To Do: Falta email
 
         //------------------------------ Equipos --------------------------------------
         app.get("/equipos", async function (req, res, next) {
@@ -210,7 +214,6 @@ class BackOffice {
                 console.log(err);
             }
         });
-
         app.post("/saveequipo", async function (req, res, next) {
             let data = {
                 equipo_modelo: req.body.equipo_modelo,
